@@ -97,43 +97,63 @@ export const RecipeWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-end;
-    > div {
-      width: 100%;
-      max-width: 164px;
-      aspect-ratio: 140 /83;
-      &.one {
-        z-index: 2;
-      }
-      &.two {
-        transform: translateY(-50px);
-        z-index: 1;
-      }
-      &.three {
-        transform: translateY(-100px);
-        z-index: 0;
-      }
-      &.strawberry {
-        background: url(/img/ico_icecream_strawberry.svg) no-repeat center /
-          cover;
-      }
-      &.choco {
-        background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
-      }
-      &.mint {
-        background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
-      }
-    }
   }
 `;
+
 export const Recipe = styled.div`
   width: 100%;
+  max-width: 196px;
+  height: 268px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border: 1px solid #cbbf93;
+  background-color: #fff;
+  border-radius: 22px;
+  box-shadow: 0 9px #cbbf93;
+  padding: 20px 44px;
+  .title {
+    color: #444;
+    font-size: 14px;
+    margin-bottom: 12px;
+  }
 `;
 
-export const MyRecipe = styled.div`
+export const IcecreamBox = styled.div`
+  width: 100%;
+  height: 198px;
+  position: relative;
+  > div {
+    position: absolute;
+  }
+  .one {
+    bottom: 0;
+    z-index: 0;
+  }
+  .two {
+    bottom: 28px;
+    z-index: 1;
+  }
+  .three {
+    bottom: 56px;
+    z-index: 2;
+  }
+  .four {
+    bottom: 84px;
+    z-index: 3;
+  }
+  .five {
+    bottom: 112px;
+    z-index: 4;
+  }
+  .six {
+    bottom: 140px;
+    z-index: 5;
+  }
+`;
+
+export const MyRecipe = styled(Recipe)`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -141,28 +161,13 @@ export const MyRecipe = styled.div`
   justify-content: space-between;
   .object {
     > div {
-      &.one {
-        z-index: 0;
-        transform: translateY(-100px);
-      }
-    }
-    &.second {
+      bottom: 0;
+      width: 100%;
+      height: 100%;
       > div {
+        position: absolute;
         &.one {
-          z-index: 1;
-          transform: translateY(-50px);
-        }
-        &.two {
-          transform: translateY(-100px);
-          z-index: 0;
-        }
-      }
-    }
-    &.third {
-      > div {
-        &.one {
-          transform: translateY(0);
-          z-index: 2;
+          bottom: 0;
         }
       }
     }
@@ -171,9 +176,9 @@ export const MyRecipe = styled.div`
 
 export const BtnWrap = styled.div`
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   max-width: 470px;
   position: fixed;
@@ -182,9 +187,9 @@ export const BtnWrap = styled.div`
   transform: translateX(-50%);
   gap: 20px;
   padding: 0 16px;
-  > div {
-    display: flex;
-    justify-content: center;
+  .buttons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
     width: 100%;
   }
@@ -192,6 +197,30 @@ export const BtnWrap = styled.div`
     font-size: 14px;
     color: #333;
     font-weight: 900;
+  }
+`;
+
+export const IcecreamItem = styled.div`
+  width: 100%;
+  max-width: 164px;
+  aspect-ratio: 140 /83;
+  &.strawberry {
+    background: url(/img/ico_icecream_strawberry.svg) no-repeat center / cover;
+  }
+  &.choco {
+    background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
+  }
+  &.mint {
+    background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
+  }
+  &.vanilla {
+    background: url(/img/ico_icecream_vanilla.svg) no-repeat center / cover;
+  }
+  &.blueberry {
+    background: url(/img/ico_icecream_blueberry.svg) no-repeat center / cover;
+  }
+  &.greentea {
+    background: url(/img/ico_icecream_greentea.svg) no-repeat center / cover;
   }
 `;
 
@@ -215,87 +244,132 @@ export const Button = styled.button`
   &.mint {
     background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
   }
+  &.vanilla {
+    background: url(/img/ico_icecream_vanilla.svg) no-repeat center / cover;
+  }
+  &.blueberry {
+    background: url(/img/ico_icecream_blueberry.svg) no-repeat center / cover;
+  }
+  &.greentea {
+    background: url(/img/ico_icecream_greentea.svg) no-repeat center / cover;
+  }
 `;
 
 export const UserList = styled.div`
-  background: #fff;
-  border-radius: 36px;
-  padding: 36px;
+  background: #fff5db;
+  border-radius: 44px;
+  padding: 24px;
   width: 100%;
-  max-width: 316px;
+  max-width: 396px;
   position: fixed;
   top: 90px;
-  left: 24px;
+  left: 60px;
+  border: 2px solid #a87b00;
+  box-shadow: 0px 17px #cbbf93;
+  .title {
+    font-size: 18px;
+    color: #444;
+    font-weight: 900;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+
   @media all and (max-width: 1250px) {
     position: static;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: nowrap;
-    max-width: none;
-    width: calc(100% - 32px);
-    gap: 20px;
-    padding: 20px;
-    border-radius: 20px;
-  }
-  .first-user {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 40px;
-    @media all and (max-width: 1250px) {
-      margin-bottom: 0;
-      width: 50%;
-    }
-    .title {
-      font-size: 20px;
-      font-weight: bold;
-      color: #444;
-      @media all and (max-width: 1250px) {
-        font-size: 16px;
-      }
-    }
-    .name {
-      display: block;
-      margin-top: 18px;
-      font-size: 36px;
-      font-weight: bold;
-      color: #ff3636;
-      @media all and (max-width: 1250px) {
-        margin-top: 12px;
-        font-size: 30px;
-      }
-    }
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background-color: unset;
+    max-width: unset;
+    padding: 0 16px;
   }
 `;
 
-export const OtherUser = styled.div`
-  display: flex;
-  flex-direction: column;
-  @media all and (max-width: 1250px) {
-    width: 50%;
-  }
-  .index {
-    width: 100%;
-    padding-bottom: 6px;
-    border-bottom: 1px solid #ccc;
-    margin-bottom: 12px;
-  }
-`;
 export const ScrollWrapper = styled.div`
-  height: 120px;
+  width: 100%;
   overflow-y: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px 10px;
+  padding-bottom: 20px;
+  max-height: 700px;
   @media all and (max-width: 1250px) {
-    height: 60px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 export const UserTag = styled.div`
+  width: 100px;
+  height: 120px;
+  min-width: 100px;
+  min-height: 120px;
+  border-radius: 10px;
+  border: 1px solid #edddcc;
+  background-color: #fff3e6;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  span {
-    font-size: 14px;
-    color: #333;
+  flex-direction: column;
+  padding: 0 14px;
+  box-shadow: 0px 7px #e2d2c0;
+  &.first {
+    border-color: #e0a400;
+    background-color: #ffd972;
+    box-shadow: 0px 7px #e2b641;
+    .wrap {
+      border-color: #ffeab2;
+    }
+  }
+  &.second {
+    border-color: #bebebe;
+    background-color: #ebebeb;
+    box-shadow: 0px 7px #a2a2a2;
+    .wrap {
+      border-color: #d8d8d8;
+    }
+  }
+  &.third {
+    border-color: #d0ad89;
+    background-color: #eacaa9;
+    box-shadow: 0px 7px #be9a76;
+    .wrap {
+      border-color: #d0b99d;
+    }
+  }
+  .wrap {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid #edd7bf;
+    padding-bottom: 14px;
+    .index {
+      text-shadow: -1px 0px #444, 0px 1px #444, 1px 0px #444, 0px -1px #444;
+      font-size: 18px;
+      font-weight: 900;
+      color: #ffffff;
+    }
+    .name {
+      display: block;
+      width: 100%;
+      text-align: center;
+      color: #444;
+      font-weight: 900;
+      font-size: 16px;
+    }
+  }
+  .score {
+    display: block;
+    text-align: center;
+    color: #444;
+    font-weight: 900;
+    font-size: 30px;
+    margin-top: 11px;
   }
 `;
 

@@ -23,11 +23,12 @@ import {
   BtnWrap,
   Button,
   UserList,
-  OtherUser,
   UserTag,
   Loading,
   Account,
   ScrollWrapper,
+  IcecreamBox,
+  IcecreamItem,
 } from "../components/home-components";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
@@ -90,7 +91,7 @@ export default function Home() {
 
   const handleMyResipeMake = (e) => {
     //내 레시피에 맛 추가하기
-    const newMyRecipe = [e, ...myRecipe];
+    const newMyRecipe = [...myRecipe, e];
     setMyRecipe(newMyRecipe);
   };
 
@@ -126,7 +127,7 @@ export default function Home() {
     return shuffledArray;
   };
   const shuffleBtns = () => {
-    const shuffleBtnArray = shuffleArray([0, 1, 2]);
+    const shuffleBtnArray = shuffleArray([0, 1, 2, 3, 4, 5]);
     setRandomBtnArray(shuffleBtnArray);
     console.log(shuffleBtnArray);
   };
@@ -134,7 +135,7 @@ export default function Home() {
   const generateRandomRecipe = async () => {
     // 랜덤으로 만든 배열 DB에 업데이트
     setLoading(true);
-    const shuffledNumbers = shuffleArray([0, 1, 2]); // 여기서 섞을 숫자를 지정
+    const shuffledNumbers = shuffleArray([0, 1, 2, 3, 4, 5]); // 여기서 섞을 숫자를 지정
     setRandomRecipe(shuffledNumbers);
     try {
       await updateDoc(icecreamRef, {
@@ -202,7 +203,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    if (myRecipe.length === 3) {
+    if (myRecipe.length === 6) {
       matchRecipe();
       shuffleBtns();
     }
@@ -225,6 +226,37 @@ export default function Home() {
           </Logout>
         </Header>
         <HeaderTithe>ICECREAM FACTORY</HeaderTithe>
+        <UserList>
+          <p className="title">순위</p>
+          {rankLoading ? (
+            <Loading>Loading...</Loading>
+          ) : (
+            <ScrollWrapper>
+              {rankList.map((item, index) => {
+                return (
+                  <UserTag
+                    key={index}
+                    className={`${
+                      index === 0
+                        ? "first"
+                        : index === 1
+                        ? "second"
+                        : index === 2
+                        ? "third"
+                        : ""
+                    }`}
+                  >
+                    <div className="wrap">
+                      <span className="index">{index + 1}</span>
+                      <span className="name">{item.userName}</span>
+                    </div>
+                    <span className="score">{item.score}</span>
+                  </UserTag>
+                );
+              })}
+            </ScrollWrapper>
+          )}
+        </UserList>
         <RecipeWrapper>
           {loading ? (
             <Loading>Loading...</Loading>
@@ -233,24 +265,40 @@ export default function Home() {
               <Recipe>
                 <>
                   <p className="title">만들어주세요!</p>
-                  <div className="object">
+                  <IcecreamBox className="object">
                     {recipe.map((item, index) => {
                       return (
-                        <div
+                        <IcecreamItem
                           key={index}
                           className={`${
                             item === 0
                               ? "strawberry"
                               : item === 1
                               ? "choco"
-                              : "mint"
+                              : item === 2
+                              ? "mint"
+                              : item === 3
+                              ? "vanilla"
+                              : item === 4
+                              ? "blueberry"
+                              : "greentea"
                           } ${
-                            index === 0 ? "one" : index === 1 ? "two" : "three"
+                            index === 0
+                              ? "one"
+                              : index === 1
+                              ? "two"
+                              : index === 2
+                              ? "three"
+                              : index === 3
+                              ? "four"
+                              : index === 4
+                              ? "five"
+                              : "six"
                           }`}
-                        ></div>
+                        ></IcecreamItem>
                       );
                     })}
-                  </div>
+                  </IcecreamBox>
                 </>
               </Recipe>
               <MyRecipe>
@@ -259,36 +307,56 @@ export default function Home() {
                 ) : (
                   <>
                     <p className="title">나의 조합</p>
-                    <div
-                      className={`${
-                        myRecipe.length === 2
-                          ? "second"
-                          : myRecipe.length === 3
-                          ? "third"
-                          : ""
-                      } object`}
-                    >
-                      {myRecipe.map((item, index) => {
-                        return (
-                          <div
-                            key={index}
-                            className={`${
-                              item === 0
-                                ? "strawberry"
-                                : item === 1
-                                ? "choco"
-                                : "mint"
-                            } ${
-                              index === 0
-                                ? "one"
-                                : index === 1
-                                ? "two"
-                                : "three"
-                            }`}
-                          ></div>
-                        );
-                      })}
-                    </div>
+                    <IcecreamBox className="object">
+                      <div
+                        className={`${
+                          myRecipe.length === 1
+                            ? "first"
+                            : myRecipe.length === 2
+                            ? "second"
+                            : myRecipe.length === 3
+                            ? "third"
+                            : myRecipe.length === 4
+                            ? "fourth"
+                            : myRecipe.length === 5
+                            ? "fifth"
+                            : "sixth"
+                        }`}
+                      >
+                        {myRecipe.map((item, index) => {
+                          return (
+                            <IcecreamItem
+                              key={index}
+                              className={`${
+                                item === 0
+                                  ? "strawberry"
+                                  : item === 1
+                                  ? "choco"
+                                  : item === 2
+                                  ? "mint"
+                                  : item === 3
+                                  ? "vanilla"
+                                  : item === 4
+                                  ? "blueberry"
+                                  : "greentea"
+                              } ${
+                                index === 0
+                                  ? "one"
+                                  : index === 1
+                                  ? "two"
+                                  : index === 2
+                                  ? "three"
+                                  : index === 3
+                                  ? "four"
+                                  : index === 4
+                                  ? "five"
+                                  : "six"
+                              }`}
+                            ></IcecreamItem>
+                          );
+                        })}
+                      </div>
+                    </IcecreamBox>
                   </>
                 )}
               </MyRecipe>
@@ -296,7 +364,7 @@ export default function Home() {
           )}
         </RecipeWrapper>
         <BtnWrap>
-          <div>
+          <div className="buttons">
             {randomBtnArray.map((btnIndex) => {
               return (
                 <Button
@@ -306,52 +374,21 @@ export default function Home() {
                       ? "strawberry"
                       : btnIndex === 1
                       ? "choco"
-                      : "mint"
+                      : btnIndex === 2
+                      ? "mint"
+                      : btnIndex === 3
+                      ? "vanilla"
+                      : btnIndex === 4
+                      ? "blueberry"
+                      : "greentea"
                   }
                   onClick={() => handleMyResipeMake(btnIndex)}
                 ></Button>
               );
             })}
-            {/* <Button
-              className="strawberry"
-              onClick={() => handleMyResipeMake(0)}
-            ></Button>
-            <Button
-              className="choco"
-              onClick={() => handleMyResipeMake(1)}
-            ></Button>
-            <Button
-              className="mint"
-              onClick={() => handleMyResipeMake(2)}
-            ></Button> */}
           </div>
           <span>SELECT ME!!!</span>
         </BtnWrap>
-        <UserList>
-          <div className="first-user">
-            <p className="title">최고의 실력자</p>
-            <span className="name">
-              {rankList.length > 0 ? rankList[0].userName : "1등 없음!"}
-            </span>
-          </div>
-          {rankLoading ? (
-            <Loading>Loading...</Loading>
-          ) : (
-            <OtherUser>
-              <div className="index">기회가 있는 자</div>
-              <ScrollWrapper>
-                {rankList.slice(1).map((item, index) => {
-                  return (
-                    <UserTag key={index}>
-                      <span>{item.userName}</span>
-                      <span>{item.score}</span>
-                    </UserTag>
-                  );
-                })}
-              </ScrollWrapper>
-            </OtherUser>
-          )}
-        </UserList>
       </Wrapper>
     </>
   );
