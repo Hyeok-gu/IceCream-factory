@@ -295,8 +295,14 @@ export const UserTag = styled.div`
 export const Loading = styled.div`
   width: 100%;
   height: 100%;
-  color: red;
+  min-height: 100px;
+  color: 333;
   font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 export const Account = styled.span`
   font-size: 16px;

@@ -63,6 +63,23 @@ export default function Home() {
     }
   };
 
+  const successEvent = async () => {
+    setLoading(true);
+    try {
+      const rankQuery = query(collection(db, "rank"));
+      await onSnapshot(rankQuery, () => {
+        setSuccessActive(true);
+        setTimeout(() => {
+          setSuccessActive(false);
+        }, 1000);
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleMyResipeMake = (e) => {
     //내 레시피에 맛 추가하기
     const newMyRecipe = [e, ...myRecipe];
@@ -78,10 +95,10 @@ export default function Home() {
         if (recipe[i] !== myRecipe[i]) return false;
       }
       scoreAdd();
-      setSuccessActive(true);
-      setTimeout(() => {
-        setSuccessActive(false);
-      }, 1000);
+      // setSuccessActive(true);
+      // setTimeout(() => {
+      //   setSuccessActive(false);
+      // }, 1000);
     } catch (e) {
       console.log(e);
     } finally {
@@ -107,6 +124,7 @@ export default function Home() {
 
   const generateRandomRecipe = async () => {
     // 랜덤으로 만든 배열 DB에 업데이트
+    setLoading(true);
     const shuffledNumbers = shuffleArray([0, 1, 2]); // 여기서 섞을 숫자를 지정
     setRandomRecipe(shuffledNumbers);
     try {
@@ -115,6 +133,8 @@ export default function Home() {
       }); // Firestore 문서 업데이트
     } catch (e) {
       console.log(e);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -165,6 +185,7 @@ export default function Home() {
   useEffect(() => {
     fetchRecipe();
     getRankList();
+    successEvent();
   }, []);
 
   useEffect(() => {
@@ -177,7 +198,7 @@ export default function Home() {
     <>
       <Wrapper>
         <Success className={successActive ? "active" : ""}>
-          {userName} 성공!!
+          {lastUser} 성공!!
         </Success>
         <Header>
           <Account>{userName}</Account>
