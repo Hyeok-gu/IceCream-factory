@@ -93,16 +93,14 @@ export const RecipeWrapper = styled.div`
         z-index: 0;
       }
       &.strawberry {
-        background: url(public/img/ico_icecream_strawberry.svg) no-repeat center /
+        background: url(/img/ico_icecream_strawberry.svg) no-repeat center /
           cover;
       }
       &.choco {
-        background: url(public/img/ico_icecream_choco.svg) no-repeat center /
-          cover;
+        background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
       }
       &.mint {
-        background: url(public/img/ico_icecream_mint.svg) no-repeat center /
-          cover;
+        background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
       }
     }
   }
@@ -188,14 +186,13 @@ export const Button = styled.button`
     transform: scale(1.1) translateY(-5px);
   }
   &.strawberry {
-    background: url(public/img/ico_icecream_strawberry.svg) no-repeat center /
-      cover;
+    background: url(/img/ico_icecream_strawberry.svg) no-repeat center / cover;
   }
   &.choco {
-    background: url(public/img/ico_icecream_choco.svg) no-repeat center / cover;
+    background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
   }
   &.mint-choco {
-    background: url(public/img/ico_icecream_mint.svg) no-repeat center / cover;
+    background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
   }
 `;
 
