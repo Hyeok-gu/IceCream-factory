@@ -36,15 +36,15 @@ export default function Home() {
   const userId = auth.currentUser.uid;
   const userName = auth.currentUser.displayName;
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [myRecipeLoading, setMyRecipeLoading] = useState(false);
-  const [rankLoading, setRankLoading] = useState(false);
+  const [rankLoading, setRankLoading] = useState(true);
+  const [successActive, setSuccessActive] = useState(false);
   const [rankList, setRankList] = useState([]);
   const [recipe, setRecipe] = useState([]); // DB에 있는 레시피
   const [myRecipe, setMyRecipe] = useState([]);
   const [randomRecipe, setRandomRecipe] = useState([]);
   const [lastUser, setLastUser] = useState("");
-  const [successActive, setSuccessActive] = useState(false);
 
   const fetchRecipe = async () => {
     //DB에 있는 레시피 가져오기
@@ -63,20 +63,40 @@ export default function Home() {
     }
   };
 
-  const successEvent = async () => {
-    setLoading(true);
+  // const successEvent = () => {
+  //   try {
+  //     const rankQuery = query(collection(db, "rank"));
+  //     onSnapshot(rankQuery, () => {
+  //       setSuccessActive(true);
+  //       setTimeout(() => {
+  //         setSuccessActive(false);
+  //       }, 1500);
+  //     });
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // };
+  const successEvent = () => {
     try {
+      // 특정 컬렉션에 대한 쿼리 설정
       const rankQuery = query(collection(db, "rank"));
-      await onSnapshot(rankQuery, () => {
-        setSuccessActive(true);
-        setTimeout(() => {
-          setSuccessActive(false);
-        }, 1000);
+
+      // 컬렉션의 모든 문서에 대한 실시간 업데이트 리스너 설정
+      onSnapshot(rankQuery, (querySnapshot) => {
+        // 변경된 문서들에 대해 반복
+        querySnapshot.docChanges().forEach((change) => {
+          if (change.type === "modified") {
+            // 변경된 문서의 경우 실행
+            // 변경된 문서에 대한 동작 수행
+            setSuccessActive(true);
+            setTimeout(() => {
+              setSuccessActive(false);
+            }, 1500);
+          }
+        });
       });
     } catch (e) {
       console.log(e);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -95,10 +115,6 @@ export default function Home() {
         if (recipe[i] !== myRecipe[i]) return false;
       }
       scoreAdd();
-      // setSuccessActive(true);
-      // setTimeout(() => {
-      //   setSuccessActive(false);
-      // }, 1000);
     } catch (e) {
       console.log(e);
     } finally {
@@ -183,9 +199,12 @@ export default function Home() {
   };
 
   useEffect(() => {
+    successEvent();
+  });
+
+  useEffect(() => {
     fetchRecipe();
     getRankList();
-    successEvent();
   }, []);
 
   useEffect(() => {
@@ -198,7 +217,7 @@ export default function Home() {
     <>
       <Wrapper>
         <Success className={successActive ? "active" : ""}>
-          {lastUser} 성공!!
+          <span>{lastUser} 성공!!</span>
         </Success>
         <Header>
           <Account>{userName}</Account>
@@ -212,68 +231,74 @@ export default function Home() {
         </Header>
         <HeaderTithe>ICECREAM FACTORY</HeaderTithe>
         <RecipeWrapper>
-          <Recipe>
-            {loading ? (
-              <Loading>Loading...</Loading>
-            ) : (
-              <>
-                <p className="title">만들어주세요!</p>
-                <div className="object">
-                  {recipe.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`${
-                          item === 0
-                            ? "strawberry"
-                            : item === 1
-                            ? "choco"
-                            : "mint"
-                        } ${
-                          index === 0 ? "one" : index === 1 ? "two" : "three"
-                        }`}
-                      ></div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-          </Recipe>
-          <MyRecipe>
-            {myRecipeLoading ? (
-              <Loading>Loading..</Loading>
-            ) : (
-              <>
-                <p className="title">나의 조합</p>
-                <div
-                  className={`${
-                    myRecipe.length === 2
-                      ? "second"
-                      : myRecipe.length === 3
-                      ? "third"
-                      : ""
-                  } object`}
-                >
-                  {myRecipe.map((item, index) => {
-                    return (
-                      <div
-                        key={index}
-                        className={`${
-                          item === 0
-                            ? "strawberry"
-                            : item === 1
-                            ? "choco"
-                            : "mint"
-                        } ${
-                          index === 0 ? "one" : index === 1 ? "two" : "three"
-                        }`}
-                      ></div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
-          </MyRecipe>
+          {loading ? (
+            <Loading>Loading...</Loading>
+          ) : (
+            <>
+              <Recipe>
+                <>
+                  <p className="title">만들어주세요!</p>
+                  <div className="object">
+                    {recipe.map((item, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className={`${
+                            item === 0
+                              ? "strawberry"
+                              : item === 1
+                              ? "choco"
+                              : "mint"
+                          } ${
+                            index === 0 ? "one" : index === 1 ? "two" : "three"
+                          }`}
+                        ></div>
+                      );
+                    })}
+                  </div>
+                </>
+              </Recipe>
+              <MyRecipe>
+                {myRecipeLoading ? (
+                  <Loading>Loading..</Loading>
+                ) : (
+                  <>
+                    <p className="title">나의 조합</p>
+                    <div
+                      className={`${
+                        myRecipe.length === 2
+                          ? "second"
+                          : myRecipe.length === 3
+                          ? "third"
+                          : ""
+                      } object`}
+                    >
+                      {myRecipe.map((item, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className={`${
+                              item === 0
+                                ? "strawberry"
+                                : item === 1
+                                ? "choco"
+                                : "mint"
+                            } ${
+                              index === 0
+                                ? "one"
+                                : index === 1
+                                ? "two"
+                                : "three"
+                            }`}
+                          ></div>
+                        );
+                      })}
+                    </div>
+                  </>
+                )}
+              </MyRecipe>
+            </>
+          )}
         </RecipeWrapper>
         <BtnWrap>
           <div>

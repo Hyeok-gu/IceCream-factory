@@ -7,27 +7,34 @@ export const Wrapper = styled.div`
   align-items: center;
 `;
 
-export const Success = styled.span`
+export const Success = styled.div`
+  background-color: rgba(255, 255, 255, 1);
+  width: 100%;
+  height: 100vh;
   position: fixed;
-  font-size: 3em;
-  font-weight: 900;
-  color: #ffffff;
-  top: -200px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 99;
-  padding: 12px 24px;
-  background-color: #4d3a20;
-  border-radius: 14px;
-  box-shadow: 0 12px 4px rgba(0, 0, 0, 0.25);
+  z-index: -1;
   opacity: 0;
   transition: all 0.1s linear;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media all and (max-width: 1250px) {
     font-size: 1.6em;
   }
+  span {
+    font-size: 30px;
+    font-weight: 900;
+    color: #333;
+    opacity: 0;
+    transition: all 0.1s linear;
+    transition-delay: 0.5s;
+  }
   &.active {
-    top: 24px;
     opacity: 1;
+    z-index: 10;
+    span {
+      opacity: 1;
+    }
   }
 `;
 export const Header = styled.header`
