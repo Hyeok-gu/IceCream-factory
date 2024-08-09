@@ -212,7 +212,7 @@ export const Button = styled.button`
   &.choco {
     background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
   }
-  &.mint-choco {
+  &.mint {
     background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
   }
 `;

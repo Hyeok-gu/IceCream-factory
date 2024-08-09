@@ -45,6 +45,7 @@ export default function Home() {
   const [myRecipe, setMyRecipe] = useState([]);
   const [randomRecipe, setRandomRecipe] = useState([]);
   const [lastUser, setLastUser] = useState("");
+  const [randomBtnArray, setRandomBtnArray] = useState([]);
 
   const fetchRecipe = async () => {
     //DB에 있는 레시피 가져오기
@@ -63,19 +64,6 @@ export default function Home() {
     }
   };
 
-  // const successEvent = () => {
-  //   try {
-  //     const rankQuery = query(collection(db, "rank"));
-  //     onSnapshot(rankQuery, () => {
-  //       setSuccessActive(true);
-  //       setTimeout(() => {
-  //         setSuccessActive(false);
-  //       }, 1500);
-  //     });
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
   const successEvent = () => {
     try {
       // 특정 컬렉션에 대한 쿼리 설정
@@ -136,6 +124,11 @@ export default function Home() {
       ];
     }
     return shuffledArray;
+  };
+  const shuffleBtns = () => {
+    const shuffleBtnArray = shuffleArray([0, 1, 2]);
+    setRandomBtnArray(shuffleBtnArray);
+    console.log(shuffleBtnArray);
   };
 
   const generateRandomRecipe = async () => {
@@ -203,6 +196,7 @@ export default function Home() {
   });
 
   useEffect(() => {
+    shuffleBtns();
     fetchRecipe();
     getRankList();
   }, []);
@@ -210,6 +204,7 @@ export default function Home() {
   useEffect(() => {
     if (myRecipe.length === 3) {
       matchRecipe();
+      shuffleBtns();
     }
   }, [myRecipe]); // myRecipe가 변경될 때마다 실행
 
@@ -302,7 +297,22 @@ export default function Home() {
         </RecipeWrapper>
         <BtnWrap>
           <div>
-            <Button
+            {randomBtnArray.map((btnIndex) => {
+              return (
+                <Button
+                  key={btnIndex}
+                  className={
+                    btnIndex === 0
+                      ? "strawberry"
+                      : btnIndex === 1
+                      ? "choco"
+                      : "mint"
+                  }
+                  onClick={() => handleMyResipeMake(btnIndex)}
+                ></Button>
+              );
+            })}
+            {/* <Button
               className="strawberry"
               onClick={() => handleMyResipeMake(0)}
             ></Button>
@@ -311,9 +321,9 @@ export default function Home() {
               onClick={() => handleMyResipeMake(1)}
             ></Button>
             <Button
-              className="mint-choco"
+              className="mint"
               onClick={() => handleMyResipeMake(2)}
-            ></Button>
+            ></Button> */}
           </div>
           <span>SELECT ME!!!</span>
         </BtnWrap>
