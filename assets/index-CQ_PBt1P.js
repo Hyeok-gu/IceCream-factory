@@ -3320,16 +3320,14 @@ This typically indicates that your device does not have a healthy Internet conne
         z-index: 0;
       }
       &.strawberry {
-        background: url(public/img/ico_icecream_strawberry.svg) no-repeat center /
+        background: url(/img/ico_icecream_strawberry.svg) no-repeat center /
           cover;
       }
       &.choco {
-        background: url(public/img/ico_icecream_choco.svg) no-repeat center /
-          cover;
+        background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
       }
       &.mint {
-        background: url(public/img/ico_icecream_mint.svg) no-repeat center /
-          cover;
+        background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
       }
     }
   }
@@ -3408,14 +3406,13 @@ This typically indicates that your device does not have a healthy Internet conne
     transform: scale(1.1) translateY(-5px);
   }
   &.strawberry {
-    background: url(public/img/ico_icecream_strawberry.svg) no-repeat center /
-      cover;
+    background: url(/img/ico_icecream_strawberry.svg) no-repeat center / cover;
   }
   &.choco {
-    background: url(public/img/ico_icecream_choco.svg) no-repeat center / cover;
+    background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
   }
   &.mint-choco {
-    background: url(public/img/ico_icecream_mint.svg) no-repeat center / cover;
+    background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
   }
 `,hM=Fe.div`
   background: #fff;
@@ -3535,7 +3532,7 @@ This typically indicates that your device does not have a healthy Internet conne
     box-sizing: border-box;
   }
   body {
-    background: url(public/img/login_bg.png) no-repeat center / cover;
+    background: url(/img/login_bg.png) no-repeat center / cover;
     background-color: #FFF7D8;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     height: 100vh;
