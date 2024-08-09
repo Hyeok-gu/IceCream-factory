@@ -22,6 +22,9 @@ export const Success = styled.span`
   box-shadow: 0 12px 4px rgba(0, 0, 0, 0.25);
   opacity: 0;
   transition: all 0.1s linear;
+  @media all and (max-width: 1250px) {
+    font-size: 1.6em;
+  }
   &.active {
     top: 24px;
     opacity: 1;
@@ -52,10 +55,15 @@ export const Logout = styled.button`
 
 export const HeaderTithe = styled.h1`
   margin-top: 30px;
-  font-size: 60px;
+  font-size: 3.2em;
   font-weight: 900;
   color: #ff3636;
   letter-spacing: -2px;
+  text-align: center;
+  @media all and (max-width: 1250px) {
+    margin-top: 18px;
+    font-size: 2em;
+  }
 `;
 
 export const RecipeWrapper = styled.div`
@@ -65,6 +73,11 @@ export const RecipeWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   margin-top: 90px;
+  gap: 16px;
+  @media all and (max-width: 1250px) {
+    max-width: 360px;
+    margin-top: 30px;
+  }
   .title {
     font-size: 14px;
     color: #333;
@@ -161,6 +174,7 @@ export const BtnWrap = styled.div`
   left: 50%;
   transform: translateX(-50%);
   gap: 20px;
+  padding: 0 16px;
   > div {
     display: flex;
     justify-content: center;
@@ -205,15 +219,33 @@ export const UserList = styled.div`
   position: fixed;
   top: 90px;
   left: 24px;
+  @media all and (max-width: 1250px) {
+    position: static;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    max-width: none;
+    width: calc(100% - 32px);
+    gap: 20px;
+    padding: 20px;
+    border-radius: 20px;
+  }
   .first-user {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 40px;
+    @media all and (max-width: 1250px) {
+      margin-bottom: 0;
+      width: 50%;
+    }
     .title {
       font-size: 20px;
       font-weight: bold;
       color: #444;
+      @media all and (max-width: 1250px) {
+        font-size: 16px;
+      }
     }
     .name {
       display: block;
@@ -221,6 +253,10 @@ export const UserList = styled.div`
       font-size: 36px;
       font-weight: bold;
       color: #ff3636;
+      @media all and (max-width: 1250px) {
+        margin-top: 12px;
+        font-size: 30px;
+      }
     }
   }
 `;
@@ -228,11 +264,21 @@ export const UserList = styled.div`
 export const OtherUser = styled.div`
   display: flex;
   flex-direction: column;
+  @media all and (max-width: 1250px) {
+    width: 50%;
+  }
   .index {
     width: 100%;
     padding-bottom: 6px;
     border-bottom: 1px solid #ccc;
     margin-bottom: 12px;
+  }
+`;
+export const ScrollWrapper = styled.div`
+  height: 120px;
+  overflow-y: auto;
+  @media all and (max-width: 1250px) {
+    height: 60px;
   }
 `;
 export const UserTag = styled.div`

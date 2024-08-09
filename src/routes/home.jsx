@@ -27,6 +27,7 @@ import {
   UserTag,
   Loading,
   Account,
+  ScrollWrapper,
 } from "../components/home-components";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
@@ -282,14 +283,16 @@ export default function Home() {
           ) : (
             <OtherUser>
               <div className="index">기회가 있는 자</div>
-              {rankList.slice(1).map((item, index) => {
-                return (
-                  <UserTag key={index}>
-                    <span>{item.userName}</span>
-                    <span>{item.score}</span>
-                  </UserTag>
-                );
-              })}
+              <ScrollWrapper>
+                {rankList.slice(1).map((item, index) => {
+                  return (
+                    <UserTag key={index}>
+                      <span>{item.userName}</span>
+                      <span>{item.score}</span>
+                    </UserTag>
+                  );
+                })}
+              </ScrollWrapper>
             </OtherUser>
           )}
         </UserList>
