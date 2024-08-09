@@ -70,7 +70,7 @@ export default function CreateAccount() {
             onChange={onChange}
             name="name"
             value={name}
-            placeholder="이름"
+            placeholder="닉네임을 입력하세요"
             type="text"
             required
           />
