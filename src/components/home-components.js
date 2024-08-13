@@ -18,7 +18,7 @@ export const Success = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     font-size: 1.6em;
   }
   span {
@@ -68,9 +68,9 @@ export const HeaderTithe = styled.h1`
   color: #ff3636;
   letter-spacing: -2px;
   text-align: center;
-  @media all and (max-width: 1250px) {
-    margin-top: 18px;
-    font-size: 2em;
+  @media all and (max-width: 1400px) {
+    margin-top: 0;
+    font-size: 1.8em;
   }
 `;
 
@@ -82,9 +82,10 @@ export const RecipeWrapper = styled.div`
   justify-content: center;
   margin-top: 90px;
   gap: 16px;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     max-width: 360px;
-    margin-top: 30px;
+    margin-top: 12px;
+    padding: 0 16px;
   }
   .title {
     font-size: 14px;
@@ -114,6 +115,9 @@ export const Recipe = styled.div`
   border-radius: 22px;
   box-shadow: 0 9px #cbbf93;
   padding: 20px 44px;
+  @media all and (max-width: 1400px) {
+    padding: 20px 26px;
+  }
   .title {
     color: #444;
     font-size: 14px;
@@ -308,7 +312,7 @@ export const UserList = styled.div`
     margin-bottom: 24px;
   }
 
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     position: static;
     padding: 0;
     border: none;
@@ -316,6 +320,7 @@ export const UserList = styled.div`
     background-color: unset;
     max-width: unset;
     padding: 0 16px;
+    max-width: 392px;
   }
 `;
 
@@ -327,7 +332,7 @@ export const ScrollWrapper = styled.div`
   gap: 17px 10px;
   padding-bottom: 20px;
   max-height: 700px;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     display: flex;
     flex-wrap: nowrap;
     overflow-y: hidden;
@@ -349,6 +354,16 @@ export const UserTag = styled.div`
   flex-direction: column;
   padding: 0 14px;
   box-shadow: 0px 7px #e2d2c0;
+  @media all and (max-width: 1400px) {
+    width: 100%;
+    height: 38px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: unset;
+    min-height: unset;
+    box-shadow: 0px 3px #e2d2c0;
+  }
   &.first {
     border-color: #e0a400;
     background-color: #ffd972;
@@ -382,6 +397,13 @@ export const UserTag = styled.div`
     gap: 6px;
     border-bottom: 1px solid #edd7bf;
     padding-bottom: 14px;
+    @media all and (max-width: 1400px) {
+      margin-top: 0;
+      gap: 12px;
+      flex-direction: row;
+      align-items: center;
+      padding-bottom: 0;
+    }
     .index {
       text-shadow: -1px 0px #444, 0px 1px #444, 1px 0px #444, 0px -1px #444;
       font-size: 18px;
@@ -404,6 +426,10 @@ export const UserTag = styled.div`
     font-weight: 900;
     font-size: 30px;
     margin-top: 11px;
+    @media all and (max-width: 1400px) {
+      margin-top: 0;
+      font-size: 24px;
+    }
   }
 `;
 
