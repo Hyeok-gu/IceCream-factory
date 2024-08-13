@@ -26,14 +26,15 @@ export const Success = styled.div`
     font-weight: 900;
     color: #333;
     opacity: 0;
-    transition: all 0.1s linear;
-    transition-delay: 0.5s;
+    transition: all 0.1s linear 0.5s;
+    transform: translateY(-20px) scale(1);
   }
   &.active {
     opacity: 1;
     z-index: 10;
     span {
       opacity: 1;
+      transform: translateY(0) scale(1.2);
     }
   }
 `;
