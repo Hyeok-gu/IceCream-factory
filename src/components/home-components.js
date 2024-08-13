@@ -198,6 +198,19 @@ export const BtnWrap = styled.div`
     font-size: 14px;
     color: #333;
     font-weight: 900;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: slide;
+    animation-direction: alternate;
+    @keyframes slide {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(5px);
+      }
+    }
   }
 `;
 
@@ -222,6 +235,26 @@ export const IcecreamItem = styled.div`
   }
   &.greentea {
     background: url(/img/ico_icecream_greentea.svg) no-repeat center / cover;
+  }
+  &.active {
+    animation-duration: 200ms;
+    animation-name: wiggle;
+  }
+  &.wiggle {
+    animation-duration: 1s;
+    animation-name: wiggle;
+    animation-iteration-count: infinite;
+  }
+  @keyframes wiggle {
+    from {
+      transform: scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: scaleX(0.9) scaleY(1.1);
+    }
+    to {
+      transform: scaleX(1) scaleY(1);
+    }
   }
 `;
 

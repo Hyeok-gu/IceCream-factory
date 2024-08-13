@@ -159,7 +159,7 @@ export default function Home() {
     <>
       <Wrapper>
         <Success className={gameLoading ? "active" : ""}>
-          <span className='text'>{lastUser} 성공!!</span>
+          <span className="text">{lastUser} 성공!!</span>
         </Success>
         <Header>
           <Account>{userName}</Account>
@@ -236,7 +236,7 @@ export default function Home() {
                               : index === 4
                               ? "five"
                               : "six"
-                          }`}
+                          } wiggle`}
                         ></IcecreamItem>
                       );
                     })}
@@ -266,19 +266,21 @@ export default function Home() {
                         return (
                           <IcecreamItem
                             key={index}
-                            className={`${
-                              item === 0
-                                ? "strawberry"
-                                : item === 1
-                                ? "choco"
-                                : item === 2
-                                ? "mint"
-                                : item === 3
-                                ? "vanilla"
-                                : item === 4
-                                ? "blueberry"
-                                : "greentea"
-                            } ${
+                            className={`
+                              ${index + 1 === myRecipe.length ? "active" : ""}
+                              ${
+                                item === 0
+                                  ? "strawberry"
+                                  : item === 1
+                                  ? "choco"
+                                  : item === 2
+                                  ? "mint"
+                                  : item === 3
+                                  ? "vanilla"
+                                  : item === 4
+                                  ? "blueberry"
+                                  : "greentea"
+                              } ${
                               index === 0
                                 ? "one"
                                 : index === 1
