@@ -3251,7 +3251,7 @@ This typically indicates that your device does not have a healthy Internet conne
   display: flex;
   align-items: center;
   justify-content: center;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     font-size: 1.6em;
   }
   span {
@@ -3297,9 +3297,9 @@ This typically indicates that your device does not have a healthy Internet conne
   color: #ff3636;
   letter-spacing: -2px;
   text-align: center;
-  @media all and (max-width: 1250px) {
-    margin-top: 18px;
-    font-size: 2em;
+  @media all and (max-width: 1400px) {
+    margin-top: 0;
+    font-size: 1.8em;
   }
 `,uM=Oe.div`
   width: 100%;
@@ -3309,9 +3309,10 @@ This typically indicates that your device does not have a healthy Internet conne
   justify-content: center;
   margin-top: 90px;
   gap: 16px;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     max-width: 360px;
-    margin-top: 30px;
+    margin-top: 12px;
+    padding: 0 16px;
   }
   .title {
     font-size: 14px;
@@ -3339,6 +3340,9 @@ This typically indicates that your device does not have a healthy Internet conne
   border-radius: 22px;
   box-shadow: 0 9px #cbbf93;
   padding: 20px 44px;
+  @media all and (max-width: 1400px) {
+    padding: 20px 26px;
+  }
   .title {
     color: #444;
     font-size: 14px;
@@ -3417,6 +3421,19 @@ This typically indicates that your device does not have a healthy Internet conne
     font-size: 14px;
     color: #333;
     font-weight: 900;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: slide;
+    animation-direction: alternate;
+    @keyframes slide {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(5px);
+      }
+    }
   }
 `,G_=Oe.div`
   width: 100%;
@@ -3439,6 +3456,26 @@ This typically indicates that your device does not have a healthy Internet conne
   }
   &.greentea {
     background: url(/img/ico_icecream_greentea.svg) no-repeat center / cover;
+  }
+  &.active {
+    animation-duration: 200ms;
+    animation-name: wiggle;
+  }
+  &.wiggle {
+    animation-duration: 1s;
+    animation-name: wiggle;
+    animation-iteration-count: infinite;
+  }
+  @keyframes wiggle {
+    from {
+      transform: scaleX(1) scaleY(1);
+    }
+    50% {
+      transform: scaleX(0.9) scaleY(1.1);
+    }
+    to {
+      transform: scaleX(1) scaleY(1);
+    }
   }
 `,dM=Oe.button`
   color: #fff;
@@ -3488,7 +3525,7 @@ This typically indicates that your device does not have a healthy Internet conne
     margin-bottom: 24px;
   }
 
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     position: static;
     padding: 0;
     border: none;
@@ -3496,6 +3533,7 @@ This typically indicates that your device does not have a healthy Internet conne
     background-color: unset;
     max-width: unset;
     padding: 0 16px;
+    max-width: 392px;
   }
 `,pM=Oe.div`
   width: 100%;
@@ -3505,7 +3543,7 @@ This typically indicates that your device does not have a healthy Internet conne
   gap: 17px 10px;
   padding-bottom: 20px;
   max-height: 700px;
-  @media all and (max-width: 1250px) {
+  @media all and (max-width: 1400px) {
     display: flex;
     flex-wrap: nowrap;
     overflow-y: hidden;
@@ -3526,6 +3564,16 @@ This typically indicates that your device does not have a healthy Internet conne
   flex-direction: column;
   padding: 0 14px;
   box-shadow: 0px 7px #e2d2c0;
+  @media all and (max-width: 1400px) {
+    width: 100%;
+    height: 38px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-width: unset;
+    min-height: unset;
+    box-shadow: 0px 3px #e2d2c0;
+  }
   &.first {
     border-color: #e0a400;
     background-color: #ffd972;
@@ -3559,6 +3607,13 @@ This typically indicates that your device does not have a healthy Internet conne
     gap: 6px;
     border-bottom: 1px solid #edd7bf;
     padding-bottom: 14px;
+    @media all and (max-width: 1400px) {
+      margin-top: 0;
+      gap: 12px;
+      flex-direction: row;
+      align-items: center;
+      padding-bottom: 0;
+    }
     .index {
       text-shadow: -1px 0px #444, 0px 1px #444, 1px 0px #444, 0px -1px #444;
       font-size: 18px;
@@ -3581,6 +3636,10 @@ This typically indicates that your device does not have a healthy Internet conne
     font-weight: 900;
     font-size: 30px;
     margin-top: 11px;
+    @media all and (max-width: 1400px) {
+      margin-top: 0;
+      font-size: 24px;
+    }
   }
 `,gM=Oe.div`
   width: 100%;
@@ -3598,7 +3657,9 @@ This typically indicates that your device does not have a healthy Internet conne
   display: inline-block;
   font-weight: 900;
   margin-right: 10px;
-`,Q_=oI(Ju,"icecream","Mtu2EMz2fp8FKkItKQm5"),Md=[0,1,2,3,4,5];function vM(){const t=Ji.currentUser.uid,e=Ji.currentUser.displayName,n=Al(),[r,i]=j.useState(!0),[s,o]=j.useState([]),[l,u]=j.useState([]),[c,d]=j.useState([]);j.useState([]);const[f,m]=j.useState(""),[E,R]=j.useState(Md),[C,b]=j.useState(!1),I=async()=>{i(!0);try{const g=B_(z_(Ju,"icecream")),v=B_(z_(Ju,"rank"),QL("score","desc"));await q_(g,T=>{const k=T.docs.map(N=>N.data());b(k[0].loadingState),u(k[0].recipe),m(k[0].lastUser)}),await q_(v,T=>{const k=T.docs.map(N=>N.data());o(k)})}catch(g){console.log(g)}finally{i(!1)}},_=g=>{const v=[...c,g];d(v)},S=g=>{let v=g.slice();for(let T=v.length-1;T>0;T--){const k=Math.floor(Math.random()*(T+1));[v[T],v[k]]=[v[k],v[T]]}return v},O=()=>{const g=S(Md);R(g)},F=async()=>{try{await Ji.signOut(),n("/login")}catch(g){console.error("Error signing out: ",g)}},P=async()=>{const g=oI(Ju,"rank",t),v=await eM(g);if(v.exists()){const k=(v.data().score||0)+1;await Ld(g,{score:k})}else await tM(g,{score:1,userName:e||"Unknown User"})},w=async()=>{if(d([]),l.length!==c.length)return!1;for(let g=0;g<l.length;g++)if(l[g]!==c[g])return!1;try{await Ld(Q_,{loadingState:!0}),P()}catch(g){console.log(g)}finally{const g=S(Md);setTimeout(()=>{Ld(Q_,{loadingState:!1,recipe:g,lastUser:e})},2e3)}};return j.useEffect(()=>{I()},[]),j.useEffect(()=>{c.length===6&&(w(),O())},[c]),W.jsx(W.Fragment,{children:W.jsxs(iM,{children:[W.jsx(sM,{className:C?"active":"",children:W.jsxs("span",{className:"text",children:[f," 성공!!"]})}),W.jsxs(oM,{children:[W.jsx(yM,{children:e}),W.jsx(aM,{onClick:()=>{F()},children:"로그아웃"})]}),W.jsx(lM,{children:"ICECREAM FACTORY"}),W.jsxs(fM,{children:[W.jsx("p",{className:"title",children:"순위"}),W.jsx(pM,{children:s.map((g,v)=>W.jsxs(mM,{className:`${v===0?"first":v===1?"second":v===2?"third":""}`,children:[W.jsxs("div",{className:"wrap",children:[W.jsx("span",{className:"index",children:v+1}),W.jsx("span",{className:"name",children:g.userName})]}),W.jsx("span",{className:"score",children:g.score})]},v))})]}),W.jsx(uM,{children:r?W.jsx(gM,{children:"Loading..."}):W.jsxs(W.Fragment,{children:[W.jsx(EI,{children:W.jsxs(W.Fragment,{children:[W.jsx("p",{className:"title",children:"만들어주세요!"}),W.jsx(K_,{className:"object",children:l.map((g,v)=>W.jsx(G_,{className:`${g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea"} ${v===0?"one":v===1?"two":v===2?"three":v===3?"four":v===4?"five":"six"}`},v))})]})}),W.jsx(cM,{children:W.jsxs(W.Fragment,{children:[W.jsx("p",{className:"title",children:"나의 조합"}),W.jsx(K_,{className:"object",children:W.jsx("div",{className:`${c.length===1?"first":c.length===2?"second":c.length===3?"third":c.length===4?"fourth":c.length===5?"fifth":"sixth"}`,children:c.map((g,v)=>W.jsx(G_,{className:`${g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea"} ${v===0?"one":v===1?"two":v===2?"three":v===3?"four":v===4?"five":"six"}`},v))})})]})})]})}),W.jsxs(hM,{children:[W.jsx("div",{className:"buttons",children:E.map(g=>W.jsx(dM,{className:g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea",onClick:()=>_(g)},g))}),W.jsx("span",{children:"SELECT ME!!!"})]})]})})}function _M(){return W.jsx("div",{children:"hello"})}const TI=Oe.div`
+`,Q_=oI(Ju,"icecream","Mtu2EMz2fp8FKkItKQm5"),Md=[0,1,2,3,4,5];function vM(){const t=Ji.currentUser.uid,e=Ji.currentUser.displayName,n=Al(),[r,i]=j.useState(!0),[s,o]=j.useState([]),[l,u]=j.useState([]),[c,d]=j.useState([]);j.useState([]);const[f,m]=j.useState(""),[E,R]=j.useState(Md),[C,b]=j.useState(!1),I=async()=>{i(!0);try{const g=B_(z_(Ju,"icecream")),v=B_(z_(Ju,"rank"),QL("score","desc"));await q_(g,T=>{const k=T.docs.map(N=>N.data());b(k[0].loadingState),u(k[0].recipe),m(k[0].lastUser)}),await q_(v,T=>{const k=T.docs.map(N=>N.data());o(k)})}catch(g){console.log(g)}finally{i(!1)}},_=g=>{const v=[...c,g];d(v)},S=g=>{let v=g.slice();for(let T=v.length-1;T>0;T--){const k=Math.floor(Math.random()*(T+1));[v[T],v[k]]=[v[k],v[T]]}return v},O=()=>{const g=S(Md);R(g)},F=async()=>{try{await Ji.signOut(),n("/login")}catch(g){console.error("Error signing out: ",g)}},P=async()=>{const g=oI(Ju,"rank",t),v=await eM(g);if(v.exists()){const k=(v.data().score||0)+1;await Ld(g,{score:k})}else await tM(g,{score:1,userName:e||"Unknown User"})},w=async()=>{if(d([]),l.length!==c.length)return!1;for(let g=0;g<l.length;g++)if(l[g]!==c[g])return!1;try{await Ld(Q_,{loadingState:!0}),P()}catch(g){console.log(g)}finally{const g=S(Md);setTimeout(()=>{Ld(Q_,{loadingState:!1,recipe:g,lastUser:e})},2e3)}};return j.useEffect(()=>{I()},[]),j.useEffect(()=>{c.length===6&&(w(),O())},[c]),W.jsx(W.Fragment,{children:W.jsxs(iM,{children:[W.jsx(sM,{className:C?"active":"",children:W.jsxs("span",{className:"text",children:[f," 성공!!"]})}),W.jsxs(oM,{children:[W.jsx(yM,{children:e}),W.jsx(aM,{onClick:()=>{F()},children:"로그아웃"})]}),W.jsx(lM,{children:"ICECREAM FACTORY"}),W.jsxs(fM,{children:[W.jsx("p",{className:"title",children:"순위"}),W.jsx(pM,{children:s.map((g,v)=>W.jsxs(mM,{className:`${v===0?"first":v===1?"second":v===2?"third":""}`,children:[W.jsxs("div",{className:"wrap",children:[W.jsx("span",{className:"index",children:v+1}),W.jsx("span",{className:"name",children:g.userName})]}),W.jsx("span",{className:"score",children:g.score})]},v))})]}),W.jsx(uM,{children:r?W.jsx(gM,{children:"Loading..."}):W.jsxs(W.Fragment,{children:[W.jsx(EI,{children:W.jsxs(W.Fragment,{children:[W.jsx("p",{className:"title",children:"만들어주세요!"}),W.jsx(K_,{className:"object",children:l.map((g,v)=>W.jsx(G_,{className:`${g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea"} ${v===0?"one":v===1?"two":v===2?"three":v===3?"four":v===4?"five":"six"} wiggle`},v))})]})}),W.jsx(cM,{children:W.jsxs(W.Fragment,{children:[W.jsx("p",{className:"title",children:"나의 조합"}),W.jsx(K_,{className:"object",children:W.jsx("div",{className:`${c.length===1?"first":c.length===2?"second":c.length===3?"third":c.length===4?"fourth":c.length===5?"fifth":"sixth"}`,children:c.map((g,v)=>W.jsx(G_,{className:`
+                              ${v+1===c.length?"active":""}
+                              ${g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea"} ${v===0?"one":v===1?"two":v===2?"three":v===3?"four":v===4?"five":"six"}`},v))})})]})})]})}),W.jsxs(hM,{children:[W.jsx("div",{className:"buttons",children:E.map(g=>W.jsx(dM,{className:g===0?"strawberry":g===1?"choco":g===2?"mint":g===3?"vanilla":g===4?"blueberry":"greentea",onClick:()=>_(g)},g))}),W.jsx("span",{children:"SELECT ME!!!"})]})]})})}function _M(){return W.jsx("div",{children:"hello"})}const TI=Oe.div`
   display: flex;
   align-items: center;
   justify-content: center;
