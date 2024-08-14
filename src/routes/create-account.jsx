@@ -62,8 +62,7 @@ export default function CreateAccount() {
   };
   return (
     <Wrapper>
-      <Header>ICECREAM FACTORY</Header>
-      <Box>
+      <Box className="action">
         <Title>회원가입</Title>
         <Form onSubmit={onSubmit}>
           <Input

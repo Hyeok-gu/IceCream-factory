@@ -335,9 +335,7 @@ export const ScrollWrapper = styled.div`
   max-height: 700px;
   @media all and (max-width: 1400px) {
     display: flex;
-    flex-wrap: nowrap;
-    overflow-y: hidden;
-    overflow-x: auto;
+    flex-direction: column;
     &::-webkit-scrollbar {
       display: none;
     }
@@ -467,16 +465,4 @@ export const Bg = styled.div`
     #fff7d8 20px,
     #fff7d8 30px
   );
-  /* animation-name: moving;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-  @keyframes moving {
-    from {
-      transform: scale(1);
-    }
-    to {
-      transform: scale(1.1);
-    }
-  } */
 `;

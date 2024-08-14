@@ -129,6 +129,7 @@ export default function Home() {
     try {
       await updateDoc(icecreamRef, {
         loadingState: true,
+        lastUser: userName,
       });
       scoreAdd();
     } catch (e) {
@@ -139,7 +140,6 @@ export default function Home() {
         updateDoc(icecreamRef, {
           loadingState: false,
           recipe: shuffledNumbers,
-          lastUser: userName,
         });
       }, 2000);
     }
@@ -172,7 +172,6 @@ export default function Home() {
             로그아웃
           </Logout>
         </Header>
-        <HeaderTithe>ICECREAM FACTORY</HeaderTithe>
         <UserList>
           <p className="title">순위</p>
           <ScrollWrapper>
