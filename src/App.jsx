@@ -55,6 +55,9 @@ const GlobalStyles = createGlobalStyle`
     font-weight: 600;
     margin-bottom: 24px;
   }
+  button {
+    -webkit-tap-highlight-color : transparent;
+  }
 `;
 
 function App() {

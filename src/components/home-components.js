@@ -8,16 +8,31 @@ export const Wrapper = styled.div`
 `;
 
 export const Success = styled.div`
-  background-color: rgba(255, 255, 255, 1);
   width: 100%;
-  height: 100vh;
-  position: fixed;
+  height: 100%;
+  position: absolute;
   z-index: -1;
   opacity: 0;
   transition: all 0.1s linear;
   display: flex;
   align-items: center;
   justify-content: center;
+  .first,
+  .second {
+    position: absolute;
+    width: 65%;
+    height: 100vh;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fdeab6;
+    transition: all 0.2s;
+  }
+  .second {
+    width: 100%;
+    background-color: #fffcf5;
+    transition-delay: 0.3s;
+  }
   @media all and (max-width: 1400px) {
     font-size: 1.6em;
   }
@@ -26,15 +41,20 @@ export const Success = styled.div`
     font-weight: 900;
     color: #333;
     opacity: 0;
-    transition: all 0.1s linear 0.5s;
+    transition: all 0.1s linear 1s;
     transform: translateY(-20px) scale(1);
+    z-index: 12;
   }
   &.active {
     opacity: 1;
-    z-index: 10;
+    z-index: 11;
     span {
       opacity: 1;
       transform: translateY(0) scale(1.2);
+    }
+    .first,
+    .second {
+      top: 0;
     }
   }
 `;

@@ -16,7 +16,6 @@ import {
   Success,
   Header,
   Logout,
-  HeaderTithe,
   RecipeWrapper,
   Recipe,
   MyRecipe,
@@ -43,7 +42,6 @@ export default function Home() {
   const [rankList, setRankList] = useState([]);
   const [recipe, setRecipe] = useState([]); // DB에 있는 레시피
   const [myRecipe, setMyRecipe] = useState([]);
-  const [randomRecipe, setRandomRecipe] = useState([]);
   const [lastUser, setLastUser] = useState("");
   const [randomBtnArray, setRandomBtnArray] = useState(array);
   const [gameLoading, setGameLoading] = useState(false);
@@ -161,6 +159,8 @@ export default function Home() {
       <Wrapper>
         <Success className={gameLoading ? "active" : ""}>
           <span className="text">{lastUser} 성공!!</span>
+          <div className="second"></div>
+          <div className="first"></div>
         </Success>
         <Header>
           <Account>{userName}</Account>
