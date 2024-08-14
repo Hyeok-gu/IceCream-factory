@@ -192,6 +192,7 @@ export const BtnWrap = styled.div`
   transform: translateX(-50%);
   gap: 20px;
   padding: 0 16px;
+  z-index: 10;
   .buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -450,4 +451,32 @@ export const Account = styled.span`
   display: inline-block;
   font-weight: 900;
   margin-right: 10px;
+`;
+
+export const Bg = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(
+    -45deg,
+    #fdeab6,
+    #fdeab6 20px,
+    #fff7d8 20px,
+    #fff7d8 30px
+  );
+  /* animation-name: moving;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  @keyframes moving {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.1);
+    }
+  } */
 `;

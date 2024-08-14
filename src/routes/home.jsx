@@ -29,6 +29,7 @@ import {
   ScrollWrapper,
   IcecreamBox,
   IcecreamItem,
+  Bg,
 } from "../components/home-components";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
@@ -330,6 +331,7 @@ export default function Home() {
           <span>SELECT ME!!!</span>
         </BtnWrap>
       </Wrapper>
+      <Bg />
     </>
   );
 }

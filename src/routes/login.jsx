@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
@@ -10,13 +10,14 @@ import {
   Wrapper,
   Form,
   Title,
-  Header,
+  Splash,
   Box,
 } from "../components/auth-components";
 
 export default function Login() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(false);
+  const [splashLoading, setSplashLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -49,10 +50,27 @@ export default function Login() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setSplashLoading(false);
+    }, 1500);
+  }, []);
+
   return (
     <Wrapper>
-      <Header>ICECREAM FACTORY</Header>
-      <Box>
+      {splashLoading && (
+        <Splash className={splashLoading ? "" : "hidden"}>
+          <h1>
+            ICECREAM
+            <br />
+            FACTORY
+          </h1>
+          <div className="first" />
+          <div className="second" />
+        </Splash>
+      )}
+      <Box className={!splashLoading ? "action" : ""}>
         <Title>로그인이 필요해요</Title>
         <Form onSubmit={onSubmit}>
           <Input
