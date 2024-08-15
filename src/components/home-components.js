@@ -25,12 +25,12 @@ export const Success = styled.div`
     top: -100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #fdeab6;
+    background-color: #ffba00;
     transition: all 0.2s;
   }
   .second {
     width: 100%;
-    background-color: #fffcf5;
+    background-color: #ffde53;
     transition-delay: 0.3s;
   }
   @media all and (max-width: 1400px) {
@@ -464,11 +464,32 @@ export const Loading = styled.div`
   align-items: center;
   justify-content: center;
 `;
-export const Account = styled.span`
+export const Account = styled.button`
   font-size: 16px;
   display: inline-block;
   font-weight: 900;
   margin-right: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  .profileImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    background-color: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 export const Bg = styled.div`

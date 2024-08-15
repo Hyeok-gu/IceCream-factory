@@ -30,13 +30,16 @@ import {
   IcecreamItem,
   Bg,
 } from "../components/home-components";
+import { useWindowSize } from "@react-hook/window-size";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
 const array = [0, 1, 2, 3, 4, 5];
 
 export default function Home() {
-  const userId = auth.currentUser.uid;
-  const userName = auth.currentUser.displayName;
+  const user = auth.currentUser;
+  const userId = user?.uid;
+  const userName = user?.displayName;
+  const userProfile = user?.photoURL;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [rankList, setRankList] = useState([]);
@@ -45,7 +48,7 @@ export default function Home() {
   const [lastUser, setLastUser] = useState("");
   const [randomBtnArray, setRandomBtnArray] = useState(array);
   const [gameLoading, setGameLoading] = useState(false);
-
+  const [widtn] = useWindowSize();
   const fetchRecipe = async () => {
     //DB에 있는 레시피 가져오기
     setLoading(true);
@@ -163,7 +166,16 @@ export default function Home() {
           <div className="first"></div>
         </Success>
         <Header>
-          <Account>{userName}</Account>
+          <Account
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
+            <div className="profileImg">
+              {userProfile ? <img src={userProfile} alt="프로필 이미지" /> : ""}
+            </div>
+            <span className="name">{userName}</span>
+          </Account>
           <Logout
             onClick={() => {
               logOut();
