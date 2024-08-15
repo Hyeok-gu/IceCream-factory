@@ -88,7 +88,14 @@ export default function Profile() {
     setLoading(true);
     try {
       const userDocSnap = await getDoc(doc(db, "rank", user.uid));
-      setUserRank(userDocSnap.data().score || 0);
+
+      if (!userDocSnap.exists()) {
+        //문서의 존재 유무 확인
+        setUserRank(0);
+      } else {
+        const score = userDocSnap.data()?.score || 0;
+        setUserRank(score);
+      }
     } catch (e) {
       console.log(e);
     } finally {
