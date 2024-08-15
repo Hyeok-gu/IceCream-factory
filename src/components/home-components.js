@@ -17,6 +17,8 @@ export const Success = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 24px;
   .first,
   .second {
     position: absolute;
@@ -33,6 +35,14 @@ export const Success = styled.div`
     background-color: #ffde53;
     transition-delay: 0.3s;
   }
+  img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    z-index: 13;
+    opacity: 0;
+    transition: all 0.1s linear 1s;
+  }
   @media all and (max-width: 1400px) {
     font-size: 1.6em;
   }
@@ -48,10 +58,12 @@ export const Success = styled.div`
   &.active {
     opacity: 1;
     z-index: 11;
+    img,
     span {
       opacity: 1;
       transform: translateY(0) scale(1.2);
     }
+
     .first,
     .second {
       top: 0;

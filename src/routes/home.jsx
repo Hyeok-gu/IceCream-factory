@@ -161,6 +161,7 @@ export default function Home() {
     <>
       <Wrapper>
         <Success className={gameLoading ? "active" : ""}>
+          {userProfile ? <img src={userProfile} alt="프로필 이미지" /> : ""}
           <span className="text">{lastUser} 성공!!</span>
           <div className="second"></div>
           <div className="first"></div>
