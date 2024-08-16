@@ -326,7 +326,7 @@ export const RecipeWrapper = styled.div`
   max-width: 480px;
   display: flex;
   justify-content: center;
-  margin-top: 90px;
+  margin-top: 45px;
   gap: 16px;
   @media all and (max-width: 1024px) {
     padding: 0 16px;
@@ -372,9 +372,6 @@ export const Recipe = styled.div`
     left: 50%;
     top: 0;
     transform: translate(-50%, -50%);
-  }
-  @media all and (max-width: 1400px) {
-    padding: 20px 26px;
   }
   .title {
     color: #222;

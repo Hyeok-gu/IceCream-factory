@@ -282,33 +282,6 @@ export default function Home() {
             </button>
           </RankListBtn>
         </Header>
-        {/* <UserList>
-          <p className="title">순위</p>
-          <ScrollWrapper>
-            {rankList.map((item, index) => {
-              return (
-                <UserTag
-                  key={index}
-                  className={`${
-                    index === 0
-                      ? "first"
-                      : index === 1
-                      ? "second"
-                      : index === 2
-                      ? "third"
-                      : ""
-                  }`}
-                >
-                  <div className="wrap">
-                    <span className="index">{index + 1}</span>
-                    <span className="name">{item.userName}</span>
-                  </div>
-                  <span className="score">{item.score}</span>
-                </UserTag>
-              );
-            })}
-          </ScrollWrapper>
-        </UserList> */}
         <RecipeWrapper>
           {loading ? (
             <Loading>Loading...</Loading>

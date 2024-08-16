@@ -4,12 +4,11 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   position: fixed;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.9);
   top: 0;
   left: 0;
   z-index: 100;
   padding: 42px 16px 0;
-  backdrop-filter: blur(10px);
   display: flex;
   justify-content: center;
 `;
@@ -17,9 +16,9 @@ const Wrapper = styled.div`
 const Exit = styled.button`
   width: 44px;
   height: 44px;
-  border: 3px solid #211208;
+  border: 3px solid #c83517;
   border-radius: 9px;
-  background-color: #3b2e26;
+  background-color: #f84c4c;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -37,7 +36,6 @@ const Exit = styled.button`
 const List = styled.div`
   width: 100%;
   max-width: 480px;
-  border: 1px solid red;
 `;
 
 const Title = styled.p`
