@@ -432,7 +432,7 @@ export const BtnWrap = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  max-width: 470px;
+  max-width: 392px;
   position: fixed;
   bottom: 44px;
   left: 50%;
@@ -440,6 +440,9 @@ export const BtnWrap = styled.div`
   gap: 20px;
   padding: 0 16px;
   z-index: 10;
+  @media all and (max-width: 1024px) {
+    bottom: 30px;
+  }
   .buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -454,6 +457,9 @@ export const BtnWrap = styled.div`
     animation-iteration-count: infinite;
     animation-name: slide;
     animation-direction: alternate;
+    @media all and (max-width: 1024px) {
+      display: none;
+    }
     @keyframes slide {
       from {
         transform: translateY(0);
@@ -514,30 +520,36 @@ export const Button = styled.button`
   color: #fff;
   border: none;
   width: 100%;
-  max-width: 140px;
-  aspect-ratio: 140 /83;
+  padding: 0;
+  max-width: 112px;
+  aspect-ratio: 112 / 96;
   transition: all 0.2s linear;
   cursor: pointer;
   &:hover {
     transform: scale(1.1) translateY(-5px);
   }
+  @media all and (max-width: 1024px) {
+    &:hover {
+      transform: unset;
+    }
+  }
   &.strawberry {
-    background: url(/img/ico_icecream_strawberry.svg) no-repeat center / cover;
+    background: url(/img/button_strawberry.svg) no-repeat center / contain;
   }
   &.choco {
-    background: url(/img/ico_icecream_choco.svg) no-repeat center / cover;
+    background: url(/img/button_choco.svg) no-repeat center / cover;
   }
   &.mint {
-    background: url(/img/ico_icecream_mint.svg) no-repeat center / cover;
+    background: url(/img/button_mint.svg) no-repeat center / cover;
   }
   &.vanilla {
-    background: url(/img/ico_icecream_vanilla.svg) no-repeat center / cover;
+    background: url(/img/button_vanilla.svg) no-repeat center / cover;
   }
   &.blueberry {
-    background: url(/img/ico_icecream_blueberry.svg) no-repeat center / cover;
+    background: url(/img/button_blueberry.svg) no-repeat center / cover;
   }
   &.greentea {
-    background: url(/img/ico_icecream_greentea.svg) no-repeat center / cover;
+    background: url(/img/button_greentea.svg) no-repeat center / cover;
   }
 `;
 
@@ -694,16 +706,29 @@ export const Loading = styled.div`
 
 export const Bg = styled.div`
   width: 100%;
-  height: 100vh;
+  height: 130px;
   position: fixed;
-  top: 0;
+  bottom: 0;
   left: 0;
   z-index: -1;
-  background: repeating-linear-gradient(
-    -45deg,
-    #fdeab6,
-    #fdeab6 20px,
-    #fff7d8 20px,
-    #fff7d8 30px
-  );
+  border-top: 2px solid #415615;
+  background-color: #728e36;
+  &::before {
+    content: "";
+    width: 100%;
+    height: 12px;
+    background-color: #adb337;
+    position: absolute;
+  }
+  &::after {
+    content: "";
+    width: 100%;
+    height: 24px;
+    top: 12px;
+    background-color: #819f25;
+    position: absolute;
+  }
+  @media all and (max-width: 1024px) {
+    height: 98px;
+  }
 `;
