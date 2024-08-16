@@ -24,13 +24,18 @@ import {
   UserList,
   UserTag,
   Loading,
-  Account,
   ScrollWrapper,
   IcecreamBox,
   IcecreamItem,
   Bg,
+  ProfileImg,
+  ProfileWrapper,
+  ProfileInfo,
+  HallFame,
+  RankingItem,
+  RankingWrap,
+  RankListBtn,
 } from "../components/home-components";
-import { useWindowSize } from "@react-hook/window-size";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
 const array = [0, 1, 2, 3, 4, 5];
@@ -48,7 +53,7 @@ export default function Home() {
   const [lastUser, setLastUser] = useState("");
   const [randomBtnArray, setRandomBtnArray] = useState(array);
   const [gameLoading, setGameLoading] = useState(false);
-  const [widtn] = useWindowSize();
+  const [userScore, setUserScore] = useState();
   const fetchRecipe = async () => {
     //DB에 있는 레시피 가져오기
     setLoading(true);
@@ -105,6 +110,17 @@ export default function Home() {
     }
   };
 
+  const getUserScore = async () => {
+    const userDocRef = doc(db, "rank", userId);
+    const userDocSnap = await getDoc(userDocRef);
+    if (userDocSnap.exists()) {
+      const currentScore = userDocSnap.data().score || 0; // score가 없으면 기본값 0
+      setUserScore(currentScore);
+    } else {
+      setUserScore(0);
+    }
+  };
+
   const scoreAdd = async () => {
     const userDocRef = doc(db, "rank", userId);
     const userDocSnap = await getDoc(userDocRef);
@@ -112,11 +128,13 @@ export default function Home() {
       const currentScore = userDocSnap.data().score || 0; // score가 없으면 기본값 0
       const newScore = currentScore + 1;
       await updateDoc(userDocRef, { score: newScore });
+      setUserScore(newScore);
     } else {
       await setDoc(userDocRef, {
         score: 1,
         userName: userName || "Unknown User",
       });
+      setUserScore(1);
     }
   };
 
@@ -148,6 +166,7 @@ export default function Home() {
 
   useEffect(() => {
     fetchRecipe();
+    getUserScore();
   }, []);
 
   useEffect(() => {
@@ -167,25 +186,92 @@ export default function Home() {
           <div className="first"></div>
         </Success>
         <Header>
-          <Account
+          <ProfileWrapper
             onClick={() => {
               navigate("/profile");
             }}
           >
-            <div className="profileImg">
+            <ProfileImg title="마이페이지 바로가기">
               {userProfile ? <img src={userProfile} alt="프로필 이미지" /> : ""}
+            </ProfileImg>
+            <ProfileInfo title="마이페이지 바로가기">
+              <div className="textWrap">
+                <span>{userName}</span>
+                <span>{userScore}</span>
+              </div>
+              <Logout
+                title="로그아웃"
+                onClick={() => {
+                  logOut();
+                }}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    id="그룹_1"
+                    data-name="그룹 1"
+                    transform="translate(-254 -60)"
+                  >
+                    <path
+                      id="logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24"
+                      d="M121.778-824a1.712,1.712,0,0,1-1.256-.522,1.712,1.712,0,0,1-.522-1.256v-12.444a1.712,1.712,0,0,1,.522-1.256,1.712,1.712,0,0,1,1.256-.522H128v1.778h-6.222v12.444H128V-824Zm9.778-3.556-1.222-1.289,2.267-2.267h-7.267v-1.778H132.6l-2.267-2.267,1.222-1.289L136-832Z"
+                      transform="translate(138 904)"
+                      fill="#fff"
+                      stroke="#fff"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1"
+                    />
+                    <rect
+                      id="사각형_4"
+                      data-name="사각형 4"
+                      width="24"
+                      height="24"
+                      transform="translate(254 60)"
+                      fill="none"
+                    />
+                  </g>
+                </svg>
+              </Logout>
+            </ProfileInfo>
+          </ProfileWrapper>
+          <HallFame>
+            <div className="title">
+              <span>명예의 전당</span>
             </div>
-            <span className="name">{userName}</span>
-          </Account>
-          <Logout
-            onClick={() => {
-              logOut();
-            }}
-          >
-            로그아웃
-          </Logout>
+            <RankingWrap>
+              {rankList.slice(0, 3).map((item, index) => {
+                return (
+                  <RankingItem
+                    key={index}
+                    className={`${
+                      index === 0
+                        ? "first"
+                        : index === 1
+                        ? "second"
+                        : index === 2
+                        ? "third"
+                        : ""
+                    }`}
+                  >
+                    <span>{item.userName}</span>
+                    <span>{item.score}</span>
+                  </RankingItem>
+                );
+              })}
+            </RankingWrap>
+          </HallFame>
+          <RankListBtn>
+            <button title="랭킹 보기">
+              <img src="/img/ico_rank.svg" alt="랭킹리스트 보기" />
+            </button>
+          </RankListBtn>
         </Header>
-        <UserList>
+        {/* <UserList>
           <p className="title">순위</p>
           <ScrollWrapper>
             {rankList.map((item, index) => {
@@ -211,7 +297,7 @@ export default function Home() {
               );
             })}
           </ScrollWrapper>
-        </UserList>
+        </UserList> */}
         <RecipeWrapper>
           {loading ? (
             <Loading>Loading...</Loading>

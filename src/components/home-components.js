@@ -70,41 +70,222 @@ export const Success = styled.div`
     }
   }
 `;
+
+// 헤더 영역
 export const Header = styled.header`
   width: 100%;
-  height: 60px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-top: 30px;
+  padding-bottom: 20px;
+`;
+
+export const ProfileWrapper = styled.div`
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+`;
+
+export const ProfileImg = styled.div`
+  width: 80px;
+  min-width: 80px;
+  aspect-ratio: 1 / 1;
+
+  border-radius: 22px;
+  border: 7px solid #1f0c1f;
+  background-color: #eee;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 24px;
-`;
-export const Logout = styled.button`
-  font-size: 16px;
-  color: #333;
-  background-color: #fff;
-  border-radius: 24px;
-  padding: 12px 24px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid #eee;
-  &:hover {
-    background-color: #eee;
+  justify-content: center;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 `;
 
-export const HeaderTithe = styled.h1`
-  margin-top: 30px;
-  font-size: 3.2em;
-  font-weight: 900;
-  color: #ff3636;
-  letter-spacing: -2px;
-  text-align: center;
-  @media all and (max-width: 1400px) {
-    margin-top: 0;
-    font-size: 1.8em;
+export const ProfileInfo = styled.div`
+  height: 66px;
+  border-radius: 0 9px 9px 0;
+  background-color: #2c211b;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  padding: 13px 20px 21px;
+  transform: translateX(-7px);
+  .textWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    span {
+      font-size: 16px;
+      color: #fff;
+      font-weight: 900;
+      text-shadow: -1px 0px #050000, 0px 1px #050000, 1px 0px #050000,
+        0px -1px #050000;
+    }
   }
 `;
+
+export const Logout = styled.button`
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 20px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s linear;
+  &:hover {
+    transform: translateX(5px);
+  }
+`;
+
+export const HallFame = styled.div`
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .title {
+    width: 100%;
+    max-width: 130px;
+    height: 38px;
+    background-color: #f11532;
+    border: 3px solid #b70000;
+    border-radius: 5px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 3px #b70000;
+    margin-bottom: 46px;
+    span {
+      color: #fff;
+      font-weight: 900;
+      font-size: 16px;
+    }
+    &::after,
+    &::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background-color: #fff;
+      border-radius: 50%;
+      border: 1px solid #b70000;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    &::after {
+      left: 9px;
+    }
+    &::before {
+      right: 9px;
+    }
+  }
+`;
+
+export const RankingWrap = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const RankingItem = styled.div`
+  width: 100%;
+  max-width: 114px;
+  background-color: #2c211b;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  align-items: center;
+  gap: 7px;
+  padding: 26px 0 16px;
+  position: relative;
+  &::after {
+    content: "";
+    width: 28px;
+    height: 30px;
+    display: block;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+  }
+  span {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 900;
+  }
+  &.first {
+    outline: 3px solid #fff4e1;
+    border: 3px solid #ffb300;
+    background-color: #ffce5b;
+    order: 1;
+    box-shadow: 0 2px 12px #ff3d00;
+    &::after {
+      background: url(/img/ico_1st_badge.svg) no-repeat center / contain;
+      top: -4px;
+    }
+    span {
+      color: #392b20;
+    }
+  }
+  &.second {
+    order: 0;
+    transform: translateY(20px);
+    &::after {
+      background: url(/img/ico_2nd_badge.svg) no-repeat center / contain;
+      top: 0;
+    }
+  }
+  &.third {
+    order: 2;
+    transform: translateY(20px);
+    &::after {
+      background: url(/img/ico_3rd_badge.svg) no-repeat center / contain;
+      top: 0;
+    }
+  }
+`;
+
+export const RankListBtn = styled.div`
+  width: 100%;
+  max-width: 370px;
+  display: flex;
+  padding-top: 20px;
+  justify-content: flex-end;
+  button {
+    width: 44px;
+    height: 44px;
+    border: 3px solid #211208;
+    border-radius: 9px;
+    background-color: #3b2e26;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.1s linear;
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+`;
+
+// 헤더 영역 끝
 
 export const RecipeWrapper = styled.div`
   width: 100%;
@@ -475,33 +656,6 @@ export const Loading = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-`;
-export const Account = styled.button`
-  font-size: 16px;
-  display: inline-block;
-  font-weight: 900;
-  margin-right: 10px;
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  gap: 6px;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-  .profileImg {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 1px solid #ddd;
-    background-color: #eee;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    img {
-      width: 100%;
-    }
-  }
 `;
 
 export const Bg = styled.div`
