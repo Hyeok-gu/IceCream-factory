@@ -36,6 +36,7 @@ import {
   RankingWrap,
   RankListBtn,
 } from "../components/home-components";
+import RankingScreen from "../components/ranking";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
 const array = [0, 1, 2, 3, 4, 5];
@@ -47,7 +48,9 @@ export default function Home() {
   const userProfile = user?.photoURL;
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [showRank, setShowRank] = useState(false);
   const [rankList, setRankList] = useState([]);
+
   const [recipe, setRecipe] = useState([]); // DB에 있는 레시피
   const [myRecipe, setMyRecipe] = useState([]);
   const [lastUser, setLastUser] = useState("");
@@ -163,6 +166,9 @@ export default function Home() {
       }, 2000);
     }
   };
+  const handleRankList = () => {
+    setShowRank(!showRank);
+  };
 
   useEffect(() => {
     fetchRecipe();
@@ -266,7 +272,12 @@ export default function Home() {
             </RankingWrap>
           </HallFame>
           <RankListBtn>
-            <button title="랭킹 보기">
+            <button
+              title="랭킹 보기"
+              onClick={() => {
+                handleRankList();
+              }}
+            >
               <img src="/img/ico_rank.svg" alt="랭킹리스트 보기" />
             </button>
           </RankListBtn>
@@ -429,6 +440,14 @@ export default function Home() {
           <span>SELECT ME!!!</span>
         </BtnWrap>
       </Wrapper>
+      {showRank && (
+        <RankingScreen
+          onClick={() => {
+            handleRankList();
+          }}
+          rankList={rankList}
+        />
+      )}
       <Bg />
     </>
   );
