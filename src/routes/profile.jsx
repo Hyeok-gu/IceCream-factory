@@ -4,74 +4,168 @@ import { doc, getDoc } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { updateProfile } from "firebase/auth";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 
-export const Wrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   width: 100%;
-  padding: 0 16px;
+  padding: 30px 16px 0;
+`;
+
+const PageTitle = styled.div`
+  width: 100%;
+  max-width: 100px;
+  border: 2px solid #1c1108;
+  background-color: #392b20;
+  padding: 6px 11px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 60px;
+  span {
+    font-weight: 900;
+    color: #fff;
+    font-size: 16px;
+  }
+`;
+
+const CardWrapper = styled.div`
+  width: 100%;
+  max-width: 320px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0e3c3;
+  border: 2px solid #3f2d23;
+  position: relative;
+  box-shadow: 0 6px #3f2d23, 0 11px rgba(63, 45, 35, 0.5);
+  padding: 60px 30px 30px;
+  &::after {
+    content: "";
+    width: 42px;
+    height: 50px;
+    display: block;
+    background: url(/img/ico_clip.svg) no-repeat center / cover;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
+`;
+
+const ImgLoading = styled.div`
+  width: 90px;
+  height: 90px;
+  border-radius: 23px;
+  background-color: #e2b97e;
+  border: 3px solid #1c1108;
+  margin-bottom: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const AvatarUpload = styled.label`
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   overflow: hidden;
-  border-radius: 50%;
-  background-color: #eee;
+  border-radius: 23px;
+  background-color: #e2b97e;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  svg {
-    width: 60px;
+  border: 3px solid #1c1108;
+  margin-bottom: 38px;
+  transition: all 0.1s linear;
+  &:hover {
+    transform: translateY(-5px);
+  }
+  &.empty {
+    &::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      display: block;
+      background: url(/img/ico_camera.svg) no-repeat center / cover;
+      position: absolute;
+    }
   }
 `;
 const AvatarImg = styled.img`
   width: 100%;
+  height: 100%;
+  object-fit: cover;
 `;
 const AvaterInput = styled.input`
   display: none;
 `;
 
-export const Title = styled.h1`
+const Title = styled.h1`
   font-size: 24px;
   font-weight: 900;
   color: #333;
 `;
 
-export const Box = styled.div`
-  margin-top: 4em;
+const InfoWrap = styled.div`
   width: 100%;
-  max-width: 480px;
-  background-color: #fff;
-  border-radius: 40px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 36px;
 `;
 
-export const InfoWrap = styled.div`
-  width: 100%;
-`;
-
-export const Slot = styled.div`
+const Slot = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 6px;
-  margin-bottom: 12px;
+  margin-bottom: 26px;
 `;
 
-export const Text = styled.p`
+const Text = styled.p`
   font-size: 16px;
   color: #333;
+  font-weight: 900;
 `;
-export const SubTitle = styled.p`
+
+const SubTitle = styled.p`
   font-size: 14px;
-  color: #707070;
+  color: #6a5e55;
+  font-weight: 900;
+`;
+
+const CodeDeco = styled.img`
+  width: 100%;
+  max-width: 260px;
+`;
+
+const Pid = styled.p`
+  font-size: 14px;
+  font-weight: 900;
+  color: #c1b18a;
+  text-align: center;
+  letter-spacing: -1.5px;
+  padding-top: 22px;
+`;
+
+const Button = styled.button`
+  width: 112px;
+  height: 80px;
+  background: url(/img/ico_button_bg.svg) no-repeat center / contain;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 900;
+  margin-top: 56px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    transform: translateY(-5px);
+  }
 `;
 
 export default function Profile() {
@@ -83,6 +177,7 @@ export default function Profile() {
   const [userName, setUserName] = useState(
     `${user?.displayName ?? "Anonymous"}`
   );
+  const navigate = useNavigate();
 
   const fetchRank = async () => {
     setLoading(true);
@@ -129,38 +224,26 @@ export default function Profile() {
 
   return (
     <Wrapper>
-      <Box>
-        <Title>내정보</Title>
+      <PageTitle>
+        <span>마이페이지</span>
+      </PageTitle>
+      <CardWrapper>
         <InfoWrap>
-          <Slot>
-            <Text>프로필 이미지</Text>
-            {imgLoading ? (
-              "업로드 중..."
-            ) : (
-              <>
-                <AvatarUpload htmlFor="avatar">
-                  {avatar ? (
-                    <AvatarImg src={avatar} />
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                      className="w-5 h-5"
-                    >
-                      <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
-                    </svg>
-                  )}
-                </AvatarUpload>
-                <AvaterInput
-                  onChange={onAvatarChange}
-                  id="avatar"
-                  type="file"
-                  accept="image/*"
-                ></AvaterInput>
-              </>
-            )}
-          </Slot>
+          {imgLoading ? (
+            <ImgLoading>로딩 중</ImgLoading>
+          ) : (
+            <>
+              <AvatarUpload htmlFor="avatar" className={!avatar ? "empty" : ""}>
+                {avatar && <AvatarImg src={avatar} />}
+              </AvatarUpload>
+              <AvaterInput
+                onChange={onAvatarChange}
+                id="avatar"
+                type="file"
+                accept="image/*"
+              ></AvaterInput>
+            </>
+          )}
           <Slot>
             <SubTitle>닉네임</SubTitle>
             <Text>{userName}</Text>
@@ -169,8 +252,17 @@ export default function Profile() {
             <SubTitle>점수</SubTitle>
             <Text>{loading ? "점수 가져오는 중 ..." : userRank}</Text>
           </Slot>
+          <CodeDeco src="/img/ico_code_deco.svg" alt="바코드 데코레이션" />
+          <Pid>PID | {user.uid}</Pid>
         </InfoWrap>
-      </Box>
+      </CardWrapper>
+      <Button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        확인
+      </Button>
     </Wrapper>
   );
 }
