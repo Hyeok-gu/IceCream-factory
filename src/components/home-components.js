@@ -80,6 +80,11 @@ export const Header = styled.header`
   padding: 0 30px;
   margin-top: 30px;
   padding-bottom: 20px;
+  @media all and (max-width: 1024px) {
+    padding: 0 16px;
+    margin-top: 20px;
+    align-items: center;
+  }
 `;
 
 export const ProfileWrapper = styled.div`
@@ -95,7 +100,6 @@ export const ProfileImg = styled.div`
   width: 80px;
   min-width: 80px;
   aspect-ratio: 1 / 1;
-
   border-radius: 22px;
   border: 7px solid #1f0c1f;
   background-color: #eee;
@@ -103,10 +107,17 @@ export const ProfileImg = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  z-index: 1;
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+  @media all and (max-width: 1024px) {
+    width: 60px;
+    min-width: 60px;
+    border-radius: 16px;
+    border: 7px solid #1f0c1f;
   }
 `;
 
@@ -124,6 +135,7 @@ export const ProfileInfo = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
     gap: 2px;
     span {
       font-size: 16px;
@@ -131,6 +143,13 @@ export const ProfileInfo = styled.div`
       font-weight: 900;
       text-shadow: -1px 0px #050000, 0px 1px #050000, 1px 0px #050000,
         0px -1px #050000;
+    }
+  }
+  @media all and (max-width: 1024px) {
+    height: 46px;
+    padding: 0 11px 0 14px;
+    span {
+      font-size: 14px;
     }
   }
 `;
@@ -158,6 +177,7 @@ export const HallFame = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-shrink: 0;
   .title {
     width: 100%;
     max-width: 130px;
@@ -171,6 +191,9 @@ export const HallFame = styled.div`
     justify-content: center;
     box-shadow: 0 3px #b70000;
     margin-bottom: 46px;
+    @media all and (max-width: 1024px) {
+      margin-bottom: 26px;
+    }
     span {
       color: #fff;
       font-weight: 900;
@@ -194,6 +217,12 @@ export const HallFame = styled.div`
     &::before {
       right: 9px;
     }
+  }
+  @media all and (max-width: 1024px) {
+    position: absolute;
+    left: 50%;
+    top: 93px;
+    transform: translateX(-50%);
   }
 `;
 
@@ -282,6 +311,11 @@ export const RankListBtn = styled.div`
     &:hover {
       transform: translateY(-5px);
     }
+  }
+  @media all and (max-width: 1024px) {
+    width: auto;
+    max-width: unset;
+    padding-top: 0;
   }
 `;
 
