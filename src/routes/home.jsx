@@ -305,7 +305,6 @@ export default function Home() {
             <>
               <Recipe>
                 <>
-                  <p className="title">만들어주세요!</p>
                   <IcecreamBox className="object">
                     {recipe.map((item, index) => {
                       return (
@@ -340,11 +339,11 @@ export default function Home() {
                       );
                     })}
                   </IcecreamBox>
+                  <p className="title">만들어주세요!</p>
                 </>
               </Recipe>
               <MyRecipe>
                 <>
-                  <p className="title">나의 조합</p>
                   <IcecreamBox className="object">
                     <div
                       className={`${
@@ -397,6 +396,7 @@ export default function Home() {
                       })}
                     </div>
                   </IcecreamBox>
+                  <p className="title">나의 조합</p>
                 </>
               </MyRecipe>
             </>

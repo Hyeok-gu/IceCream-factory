@@ -323,16 +323,14 @@ export const RankListBtn = styled.div`
 
 export const RecipeWrapper = styled.div`
   width: 100%;
-  max-width: 454px;
+  max-width: 480px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
   margin-top: 90px;
   gap: 16px;
-  @media all and (max-width: 1400px) {
-    max-width: 360px;
-    margin-top: 12px;
+  @media all and (max-width: 1024px) {
     padding: 0 16px;
+    margin-top: 240px;
   }
   .title {
     font-size: 14px;
@@ -351,22 +349,35 @@ export const RecipeWrapper = styled.div`
 
 export const Recipe = styled.div`
   width: 100%;
-  max-width: 196px;
-  height: 268px;
+  max-width: 230px;
+  aspect-ratio: 1 / 1.618;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  border: 1px solid #cbbf93;
-  background-color: #fff;
+  justify-content: flex-end;
+  border: 2px solid #3f2d23;
+  background-color: #f0e3c3;
   border-radius: 22px;
-  box-shadow: 0 9px #cbbf93;
+  box-shadow: 0 5px #3f2d23, 0 10px rgba(63, 45, 35, 0.5);
   padding: 20px 44px;
+  position: relative;
+  gap: 24px;
+  &::after {
+    content: "";
+    width: 42px;
+    height: 50px;
+    display: block;
+    background: url(/img/ico_clip.svg) no-repeat center / cover;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+  }
   @media all and (max-width: 1400px) {
     padding: 20px 26px;
   }
   .title {
-    color: #444;
+    color: #222;
     font-size: 14px;
     margin-bottom: 12px;
   }
@@ -410,7 +421,8 @@ export const MyRecipe = styled(Recipe)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 24px;
   .object {
     > div {
       bottom: 0;
@@ -434,15 +446,12 @@ export const BtnWrap = styled.div`
   width: 100%;
   max-width: 392px;
   position: fixed;
-  bottom: 44px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   gap: 20px;
   padding: 0 16px;
   z-index: 10;
-  @media all and (max-width: 1024px) {
-    bottom: 30px;
-  }
   .buttons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -451,7 +460,7 @@ export const BtnWrap = styled.div`
   }
   span {
     font-size: 14px;
-    color: #333;
+    color: #fff;
     font-weight: 900;
     animation-duration: 1s;
     animation-iteration-count: infinite;
