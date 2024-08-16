@@ -63,6 +63,11 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: center;
+  .wrap {
+    display: flex;
+    align-items: center;
+  }
   span {
     color: #fff;
     font-size: 20px;
@@ -70,6 +75,13 @@ const Row = styled.div`
   }
   .index {
     margin-right: 18px;
+  }
+  .photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    object-fit: cover;
+    margin-right: 8px;
   }
 `;
 
@@ -121,6 +133,11 @@ export default function RankingScreen(props) {
               <Row key={index}>
                 <div className="wrap">
                   <span className="index">{index + 1}등</span>
+                  <img
+                    className="photo"
+                    src={item.photoURL}
+                    alt="프로필 이미지"
+                  ></img>
                   <span className="name">{item.userName}</span>
                 </div>
                 <span className="score">{item.score}</span>

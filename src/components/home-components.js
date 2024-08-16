@@ -36,12 +36,13 @@ export const Success = styled.div`
     transition-delay: 0.3s;
   }
   img {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     z-index: 13;
     opacity: 0;
     transition: all 0.1s linear 1s;
+    object-fit: cover;
   }
   @media all and (max-width: 1400px) {
     font-size: 1.6em;
@@ -49,7 +50,7 @@ export const Success = styled.div`
   span {
     font-size: 30px;
     font-weight: 900;
-    color: #333;
+    color: #fff;
     opacity: 0;
     transition: all 0.1s linear 1s;
     transform: translateY(-20px) scale(1);
@@ -129,14 +130,14 @@ export const ProfileInfo = styled.div`
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  padding: 13px 20px 21px;
+  padding: 13px 20px;
   transform: translateX(-7px);
   .textWrap {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    gap: 2px;
+    gap: 4px;
     span {
       font-size: 16px;
       color: #fff;
@@ -180,7 +181,7 @@ export const HallFame = styled.div`
   flex-shrink: 0;
   .title {
     width: 100%;
-    max-width: 130px;
+    max-width: 140px;
     height: 38px;
     background-color: #f11532;
     border: 3px solid #b70000;

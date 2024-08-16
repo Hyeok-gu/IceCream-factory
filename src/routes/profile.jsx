@@ -16,8 +16,6 @@ const Wrapper = styled.div`
 `;
 
 const PageTitle = styled.div`
-  width: 100%;
-  max-width: 100px;
   border: 2px solid #1c1108;
   background-color: #392b20;
   padding: 6px 11px;

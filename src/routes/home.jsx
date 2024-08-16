@@ -21,10 +21,7 @@ import {
   MyRecipe,
   BtnWrap,
   Button,
-  UserList,
-  UserTag,
   Loading,
-  ScrollWrapper,
   IcecreamBox,
   IcecreamItem,
   Bg,
@@ -130,12 +127,17 @@ export default function Home() {
     if (userDocSnap.exists()) {
       const currentScore = userDocSnap.data().score || 0; // score가 없으면 기본값 0
       const newScore = currentScore + 1;
-      await updateDoc(userDocRef, { score: newScore });
+      await updateDoc(userDocRef, {
+        score: newScore,
+        photoURL: userProfile,
+        userName: userName,
+      });
       setUserScore(newScore);
     } else {
       await setDoc(userDocRef, {
         score: 1,
         userName: userName || "Unknown User",
+        photoURL: userProfile,
       });
       setUserScore(1);
     }
