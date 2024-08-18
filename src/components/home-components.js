@@ -245,7 +245,7 @@ export const RankingItem = styled.div`
   border-radius: 12px;
   align-items: center;
   gap: 7px;
-  padding: 26px 0 16px;
+  padding: 26px 0 14px;
   position: relative;
   &::after {
     content: "";
@@ -257,9 +257,16 @@ export const RankingItem = styled.div`
     left: 50%;
   }
   span {
+    width: 100%;
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 900;
+    display: block;
+    text-align: center;
+    padding: 0 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &.first {
     outline: 3px solid #fff4e1;

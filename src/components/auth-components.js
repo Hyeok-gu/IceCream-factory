@@ -164,9 +164,9 @@ export const Input = styled.input`
 `;
 
 export const Error = styled.span`
-  margin-top: 6px;
   font-weight: 600;
   color: tomato;
+  font-size: 12px;
 `;
 
 export const Switcher = styled.span`

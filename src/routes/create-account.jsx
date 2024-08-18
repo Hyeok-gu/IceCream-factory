@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import { FirebaseError } from "firebase/app";
@@ -9,7 +9,6 @@ import {
   Switcher,
   Wrapper,
   Form,
-  Header,
   Title,
   Box,
 } from "../components/auth-components";
@@ -21,6 +20,7 @@ export default function CreateAccount() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [maxNameInfo, setMaxNameInfo] = useState(false);
 
   const onChange = (e) => {
     const {
@@ -38,7 +38,14 @@ export default function CreateAccount() {
   const onSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    if (isLoading || name === "" || email === "" || password === "") return;
+    if (
+      isLoading ||
+      name === "" ||
+      name.length > 12 ||
+      email === "" ||
+      password === ""
+    )
+      return;
     try {
       setLoading(true);
       const credentials = await createUserWithEmailAndPassword(
@@ -60,6 +67,7 @@ export default function CreateAccount() {
       setLoading(false);
     }
   };
+
   return (
     <Wrapper>
       <Box className="action">
@@ -73,6 +81,9 @@ export default function CreateAccount() {
             type="text"
             required
           />
+          {name.length > 12 && (
+            <Error>최대 12글자 미만으로 입력해 주세요</Error>
+          )}
           <Input
             onChange={onChange}
             name="email"
