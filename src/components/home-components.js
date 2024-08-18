@@ -172,13 +172,18 @@ export const Logout = styled.button`
   }
 `;
 
-export const HallFame = styled.div`
+export const HallFameWrapper = styled.div`
   width: 100%;
   max-width: 370px;
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-shrink: 0;
+  &.webView {
+    @media all and (max-width: 1024px) {
+      display: none;
+    }
+  }
   .title {
     width: 100%;
     max-width: 140px;
@@ -220,10 +225,7 @@ export const HallFame = styled.div`
     }
   }
   @media all and (max-width: 1024px) {
-    position: absolute;
-    left: 50%;
-    top: 93px;
-    transform: translateX(-50%);
+    width: 100%;
   }
 `;
 
@@ -331,7 +333,6 @@ export const RecipeWrapper = styled.div`
   gap: 16px;
   @media all and (max-width: 1024px) {
     padding: 0 16px;
-    margin-top: 240px;
   }
   .title {
     font-size: 14px;

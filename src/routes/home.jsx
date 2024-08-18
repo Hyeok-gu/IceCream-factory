@@ -28,11 +28,9 @@ import {
   ProfileImg,
   ProfileWrapper,
   ProfileInfo,
-  HallFame,
-  RankingItem,
-  RankingWrap,
   RankListBtn,
 } from "../components/home-components";
+import HallFame from "../components/hallFame";
 import RankingScreen from "../components/ranking";
 
 const icecreamRef = doc(db, "icecream", "Mtu2EMz2fp8FKkItKQm5");
@@ -51,6 +49,7 @@ export default function Home() {
   const [recipe, setRecipe] = useState([]); // DB에 있는 레시피
   const [myRecipe, setMyRecipe] = useState([]);
   const [lastUser, setLastUser] = useState("");
+  const [lastUserProfile, setLastUserProfile] = useState("");
   const [randomBtnArray, setRandomBtnArray] = useState(array);
   const [gameLoading, setGameLoading] = useState(false);
   const [userScore, setUserScore] = useState();
@@ -63,6 +62,7 @@ export default function Home() {
       await onSnapshot(recipeQuery, (snapshot) => {
         const recipe = snapshot.docs.map((doc) => doc.data());
         setGameLoading(recipe[0].loadingState);
+        setLastUserProfile(recipe[0].lastUserProfile);
         setRecipe(recipe[0].recipe);
         setLastUser(recipe[0].lastUser);
       });
@@ -152,6 +152,7 @@ export default function Home() {
     }
     try {
       await updateDoc(icecreamRef, {
+        lastUserProfile: userProfile,
         loadingState: true,
         lastUser: userName,
       });
@@ -168,6 +169,7 @@ export default function Home() {
       }, 2000);
     }
   };
+
   const handleRankList = () => {
     setShowRank(!showRank);
   };
@@ -188,7 +190,11 @@ export default function Home() {
     <>
       <Wrapper>
         <Success className={gameLoading ? "active" : ""}>
-          {userProfile ? <img src={userProfile} alt="프로필 이미지" /> : ""}
+          {lastUserProfile ? (
+            <img src={lastUserProfile} alt="프로필 이미지" />
+          ) : (
+            ""
+          )}
           <span className="text">{lastUser} 성공!!</span>
           <div className="second"></div>
           <div className="first"></div>
@@ -247,32 +253,7 @@ export default function Home() {
               </Logout>
             </ProfileInfo>
           </ProfileWrapper>
-          <HallFame>
-            <div className="title">
-              <span>명예의 전당</span>
-            </div>
-            <RankingWrap>
-              {rankList.slice(0, 3).map((item, index) => {
-                return (
-                  <RankingItem
-                    key={index}
-                    className={`${
-                      index === 0
-                        ? "first"
-                        : index === 1
-                        ? "second"
-                        : index === 2
-                        ? "third"
-                        : ""
-                    }`}
-                  >
-                    <span>{item.userName}</span>
-                    <span>{item.score}</span>
-                  </RankingItem>
-                );
-              })}
-            </RankingWrap>
-          </HallFame>
+          <HallFame data={rankList} className="webView" />
           <RankListBtn>
             <button
               title="랭킹 보기"

@@ -9,6 +9,7 @@ export const Splash = styled.div`
   position: relative;
   transition: all 200ms;
   opacity: 1;
+  overflow: hidden;
   &.hidden {
     opacity: 0;
   }
@@ -48,15 +49,16 @@ export const Splash = styled.div`
   }
   .first {
     width: 70%;
-    height: 100%;
+    height: 100vh;
     background-color: #ffde53;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
     animation-name: slide;
     animation-duration: 200ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-fill-mode: forwards;
     @media all and (max-width: 728px) {
       width: 80%;
     }
@@ -71,7 +73,7 @@ export const Splash = styled.div`
   }
   .second {
     width: 40%;
-    height: 100%;
+    height: 100vh;
     background-color: #ffba00;
     position: fixed;
     left: 50%;
@@ -79,6 +81,7 @@ export const Splash = styled.div`
     animation-name: slide2nd;
     animation-duration: 200ms;
     animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation-fill-mode: forwards;
     @media all and (max-width: 728px) {
       width: 60%;
     }
@@ -99,11 +102,11 @@ export const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
+  height: 100vh;
   padding: 0 16px;
 `;
 
 export const Box = styled.div`
-  margin-top: 8em;
   width: 100%;
   max-width: 480px;
   background-color: #fff;

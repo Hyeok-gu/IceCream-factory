@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import HallFame from "./hallFame";
 
 const Wrapper = styled.div`
   width: 100%;
@@ -36,6 +37,9 @@ const Exit = styled.button`
 const List = styled.div`
   width: 100%;
   max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const Title = styled.p`
@@ -49,9 +53,10 @@ const Title = styled.p`
 
 const ScrollWrap = styled.div`
   display: flex;
+  width: 100%;
   height: 100%;
   flex-direction: column;
-  padding-top: 32px;
+  padding-top: 52px;
   gap: 16px;
   overflow-y: auto;
   &::-webkit-scrollbar {
@@ -127,12 +132,13 @@ export default function RankingScreen(props) {
       </Exit>
       <List>
         <Title>순위</Title>
+        <HallFame data={rankList} />
         <ScrollWrap>
-          {rankList.map((item, index) => {
+          {rankList.slice(3).map((item, index) => {
             return (
               <Row key={index}>
                 <div className="wrap">
-                  <span className="index">{index + 1}등</span>
+                  <span className="index">{index + 3}등</span>
                   <img
                     className="photo"
                     src={item.photoURL}
