@@ -138,7 +138,7 @@ export default function RankingScreen(props) {
             return (
               <Row key={index}>
                 <div className="wrap">
-                  <span className="index">{index + 3}등</span>
+                  <span className="index">{index + 4}등</span>
                   <img
                     className="photo"
                     src={item.photoURL}
