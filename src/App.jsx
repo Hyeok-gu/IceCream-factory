@@ -18,9 +18,9 @@ const router = createBrowserRouter(
     {
       path: "/",
       element: (
-        <ProtectRoute>
-          <Layout />
-        </ProtectRoute>
+        // <ProtectRoute>
+        <Layout />
+        // </ProtectRoute>
       ),
       children: [
         {
@@ -42,7 +42,7 @@ const router = createBrowserRouter(
       element: <CreateAccount />,
     },
   ],
-  { basename: baseName }
+  { basename: "/" }
 );
 
 const GlobalStyles = createGlobalStyle`
