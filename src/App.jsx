@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import LoadingScreen from "./components/loading-screen";
 import reset from "styled-reset";
@@ -9,36 +10,40 @@ import Profile from "./routes/profile";
 import Login from "./routes/login";
 import CreateAccount from "./routes/create-account";
 import { auth } from "./firebase";
-import { HashRouter as Router, Routes, Route } from "react-router-dom";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: (
-//       <ProtectRoute>
-//         <Layout />
-//       </ProtectRoute>
-//     ),
-//     children: [
-//       {
-//         path: "",
-//         element: <Home />,
-//       },
-//       {
-//         path: "profile",
-//         element: <Profile />,
-//       },
-//     ],
-//   },
-//   {
-//     path: "/login",
-//     element: <Login />,
-//   },
-//   {
-//     path: "/create-account",
-//     element: <CreateAccount />,
-//   },
-// ]);
+const baseName = import.meta.env.VITE_PUBLIC_URL;
+
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      element: (
+        <ProtectRoute>
+          <Layout />
+        </ProtectRoute>
+      ),
+      children: [
+        {
+          path: "",
+          element: <Home />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
+        },
+      ],
+    },
+    {
+      path: "/login",
+      element: <Login />,
+    },
+    {
+      path: "/create-account",
+      element: <CreateAccount />,
+    },
+  ],
+  { basename: baseName }
+);
 
 const GlobalStyles = createGlobalStyle`
   ${reset}
@@ -75,21 +80,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <Router>
-          <ProtectRoute>
-            <Layout />
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/create-account" element={<CreateAccount />} />
-            </Routes>
-          </ProtectRoute>
-        </Router>
-      )}
+      {isLoading ? <LoadingScreen /> : <RouterProvider router={router} />}
     </>
   );
 }
