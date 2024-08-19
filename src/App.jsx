@@ -3,8 +3,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import LoadingScreen from "./components/loading-screen";
 import reset from "styled-reset";
-import Layout from "./components/layout";
-import ProtectRoute from "./routes/protect-route";
 import Home from "./routes/home";
 import Profile from "./routes/profile";
 import Login from "./routes/login";
@@ -17,21 +15,11 @@ const router = createBrowserRouter(
   [
     {
       path: "/",
-      element: (
-        // <ProtectRoute>
-        <Layout />
-        // </ProtectRoute>
-      ),
-      children: [
-        {
-          path: "",
-          element: <Home />,
-        },
-        {
-          path: "profile",
-          element: <Profile />,
-        },
-      ],
+      element: <Home />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
     {
       path: "/login",
@@ -42,7 +30,7 @@ const router = createBrowserRouter(
       element: <CreateAccount />,
     },
   ],
-  { basename: "/" }
+  { basename: baseName }
 );
 
 const GlobalStyles = createGlobalStyle`

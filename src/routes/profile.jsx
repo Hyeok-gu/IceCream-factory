@@ -168,6 +168,11 @@ const Button = styled.button`
 
 export default function Profile() {
   const user = auth.currentUser;
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, []);
   const [loading, setLoading] = useState(true);
   const [imgLoading, setImgLoading] = useState(false);
   const [userRank, setUserRank] = useState();
@@ -222,45 +227,52 @@ export default function Profile() {
 
   return (
     <Wrapper>
-      <PageTitle>
-        <span>마이페이지</span>
-      </PageTitle>
-      <CardWrapper>
-        <InfoWrap>
-          {imgLoading ? (
-            <ImgLoading>로딩 중</ImgLoading>
-          ) : (
-            <>
-              <AvatarUpload htmlFor="avatar" className={!avatar ? "empty" : ""}>
-                {avatar && <AvatarImg src={avatar} />}
-              </AvatarUpload>
-              <AvaterInput
-                onChange={onAvatarChange}
-                id="avatar"
-                type="file"
-                accept="image/*"
-              ></AvaterInput>
-            </>
-          )}
-          <Slot>
-            <SubTitle>닉네임</SubTitle>
-            <Text>{userName}</Text>
-          </Slot>
-          <Slot>
-            <SubTitle>점수</SubTitle>
-            <Text>{loading ? "점수 가져오는 중 ..." : userRank}</Text>
-          </Slot>
-          <CodeDeco src="/img/ico_code_deco.svg" alt="바코드 데코레이션" />
-          <Pid>PID | {user.uid}</Pid>
-        </InfoWrap>
-      </CardWrapper>
-      <Button
-        onClick={() => {
-          navigate("/");
-        }}
-      >
-        확인
-      </Button>
+      {user && (
+        <>
+          <PageTitle>
+            <span>마이페이지</span>
+          </PageTitle>
+          <CardWrapper>
+            <InfoWrap>
+              {imgLoading ? (
+                <ImgLoading>로딩 중</ImgLoading>
+              ) : (
+                <>
+                  <AvatarUpload
+                    htmlFor="avatar"
+                    className={!avatar ? "empty" : ""}
+                  >
+                    {avatar && <AvatarImg src={avatar} />}
+                  </AvatarUpload>
+                  <AvaterInput
+                    onChange={onAvatarChange}
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                  ></AvaterInput>
+                </>
+              )}
+              <Slot>
+                <SubTitle>닉네임</SubTitle>
+                <Text>{userName}</Text>
+              </Slot>
+              <Slot>
+                <SubTitle>점수</SubTitle>
+                <Text>{loading ? "점수 가져오는 중 ..." : userRank}</Text>
+              </Slot>
+              <CodeDeco src="/img/ico_code_deco.svg" alt="바코드 데코레이션" />
+              <Pid>PID | {user.uid}</Pid>
+            </InfoWrap>
+          </CardWrapper>
+          <Button
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            확인
+          </Button>
+        </>
+      )}
     </Wrapper>
   );
 }
