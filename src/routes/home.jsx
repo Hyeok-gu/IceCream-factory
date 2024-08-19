@@ -38,11 +38,6 @@ const array = [0, 1, 2, 3, 4, 5];
 
 export default function Home() {
   const user = auth.currentUser;
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, []);
   const userId = user?.uid;
   const userName = user?.displayName;
   const userProfile = user?.photoURL;
@@ -194,155 +189,149 @@ export default function Home() {
   return (
     <>
       <Wrapper>
-        {user && (
-          <>
-            <Success className={gameLoading ? "active" : ""}>
-              {lastUserProfile ? (
-                <img src={lastUserProfile} alt="프로필 이미지" />
-              ) : (
-                ""
-              )}
-              <span className="text">{lastUser} 성공!!</span>
-              <div className="second"></div>
-              <div className="first"></div>
-            </Success>
-            <Header>
-              <ProfileWrapper
+        <Success className={gameLoading ? "active" : ""}>
+          {lastUserProfile ? (
+            <img src={lastUserProfile} alt="프로필 이미지" />
+          ) : (
+            ""
+          )}
+          <span className="text">{lastUser} 성공!!</span>
+          <div className="second"></div>
+          <div className="first"></div>
+        </Success>
+        <Header>
+          <ProfileWrapper
+            onClick={() => {
+              navigate("/profile");
+            }}
+          >
+            <ProfileImg title="마이페이지 바로가기">
+              {userProfile ? <img src={userProfile} alt="프로필 이미지" /> : ""}
+            </ProfileImg>
+            <ProfileInfo title="마이페이지 바로가기">
+              <div className="textWrap">
+                <span>{userName}</span>
+                <span>{userScore}</span>
+              </div>
+              <Logout
+                title="로그아웃"
                 onClick={() => {
-                  navigate("/profile");
+                  logOut();
                 }}
               >
-                <ProfileImg title="마이페이지 바로가기">
-                  {userProfile ? (
-                    <img src={userProfile} alt="프로필 이미지" />
-                  ) : (
-                    ""
-                  )}
-                </ProfileImg>
-                <ProfileInfo title="마이페이지 바로가기">
-                  <div className="textWrap">
-                    <span>{userName}</span>
-                    <span>{userScore}</span>
-                  </div>
-                  <Logout
-                    title="로그아웃"
-                    onClick={() => {
-                      logOut();
-                    }}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    id="그룹_1"
+                    data-name="그룹 1"
+                    transform="translate(-254 -60)"
                   >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
+                    <path
+                      id="logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24"
+                      d="M121.778-824a1.712,1.712,0,0,1-1.256-.522,1.712,1.712,0,0,1-.522-1.256v-12.444a1.712,1.712,0,0,1,.522-1.256,1.712,1.712,0,0,1,1.256-.522H128v1.778h-6.222v12.444H128V-824Zm9.778-3.556-1.222-1.289,2.267-2.267h-7.267v-1.778H132.6l-2.267-2.267,1.222-1.289L136-832Z"
+                      transform="translate(138 904)"
+                      fill="#fff"
+                      stroke="#fff"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1"
+                    />
+                    <rect
+                      id="사각형_4"
+                      data-name="사각형 4"
                       width="24"
                       height="24"
-                      viewBox="0 0 24 24"
-                    >
-                      <g
-                        id="그룹_1"
-                        data-name="그룹 1"
-                        transform="translate(-254 -60)"
-                      >
-                        <path
-                          id="logout_24dp_5F6368_FILL0_wght400_GRAD0_opsz24"
-                          d="M121.778-824a1.712,1.712,0,0,1-1.256-.522,1.712,1.712,0,0,1-.522-1.256v-12.444a1.712,1.712,0,0,1,.522-1.256,1.712,1.712,0,0,1,1.256-.522H128v1.778h-6.222v12.444H128V-824Zm9.778-3.556-1.222-1.289,2.267-2.267h-7.267v-1.778H132.6l-2.267-2.267,1.222-1.289L136-832Z"
-                          transform="translate(138 904)"
-                          fill="#fff"
-                          stroke="#fff"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="1"
-                        />
-                        <rect
-                          id="사각형_4"
-                          data-name="사각형 4"
-                          width="24"
-                          height="24"
-                          transform="translate(254 60)"
-                          fill="none"
-                        />
-                      </g>
-                    </svg>
-                  </Logout>
-                </ProfileInfo>
-              </ProfileWrapper>
-              <HallFame data={rankList} className="webView" />
-              <RankListBtn>
-                <button
-                  title="랭킹 보기"
-                  onClick={() => {
-                    handleRankList();
-                  }}
-                >
-                  <img src="/img/ico_rank.svg" alt="랭킹리스트 보기" />
-                </button>
-              </RankListBtn>
-            </Header>
-            <RecipeWrapper>
-              {loading ? (
-                <Loading>Loading...</Loading>
-              ) : (
+                      transform="translate(254 60)"
+                      fill="none"
+                    />
+                  </g>
+                </svg>
+              </Logout>
+            </ProfileInfo>
+          </ProfileWrapper>
+          <HallFame data={rankList} className="webView" />
+          <RankListBtn>
+            <button
+              title="랭킹 보기"
+              onClick={() => {
+                handleRankList();
+              }}
+            >
+              <img src="/img/ico_rank.svg" alt="랭킹리스트 보기" />
+            </button>
+          </RankListBtn>
+        </Header>
+        <RecipeWrapper>
+          {loading ? (
+            <Loading>Loading...</Loading>
+          ) : (
+            <>
+              <Recipe>
                 <>
-                  <Recipe>
-                    <>
-                      <IcecreamBox className="object">
-                        {recipe.map((item, index) => {
-                          return (
-                            <IcecreamItem
-                              key={index}
-                              className={`${
-                                item === 0
-                                  ? "strawberry"
-                                  : item === 1
-                                  ? "choco"
-                                  : item === 2
-                                  ? "mint"
-                                  : item === 3
-                                  ? "vanilla"
-                                  : item === 4
-                                  ? "blueberry"
-                                  : "greentea"
-                              } ${
-                                index === 0
-                                  ? "one"
-                                  : index === 1
-                                  ? "two"
-                                  : index === 2
-                                  ? "three"
-                                  : index === 3
-                                  ? "four"
-                                  : index === 4
-                                  ? "five"
-                                  : "six"
-                              } wiggle`}
-                            ></IcecreamItem>
-                          );
-                        })}
-                      </IcecreamBox>
-                      <p className="title">만들어주세요!</p>
-                    </>
-                  </Recipe>
-                  <MyRecipe>
-                    <>
-                      <IcecreamBox className="object">
-                        <div
+                  <IcecreamBox className="object">
+                    {recipe.map((item, index) => {
+                      return (
+                        <IcecreamItem
+                          key={index}
                           className={`${
-                            myRecipe.length === 1
-                              ? "first"
-                              : myRecipe.length === 2
-                              ? "second"
-                              : myRecipe.length === 3
-                              ? "third"
-                              : myRecipe.length === 4
-                              ? "fourth"
-                              : myRecipe.length === 5
-                              ? "fifth"
-                              : "sixth"
-                          }`}
-                        >
-                          {myRecipe.map((item, index) => {
-                            return (
-                              <IcecreamItem
-                                key={index}
-                                className={`
+                            item === 0
+                              ? "strawberry"
+                              : item === 1
+                              ? "choco"
+                              : item === 2
+                              ? "mint"
+                              : item === 3
+                              ? "vanilla"
+                              : item === 4
+                              ? "blueberry"
+                              : "greentea"
+                          } ${
+                            index === 0
+                              ? "one"
+                              : index === 1
+                              ? "two"
+                              : index === 2
+                              ? "three"
+                              : index === 3
+                              ? "four"
+                              : index === 4
+                              ? "five"
+                              : "six"
+                          } wiggle`}
+                        ></IcecreamItem>
+                      );
+                    })}
+                  </IcecreamBox>
+                  <p className="title">만들어주세요!</p>
+                </>
+              </Recipe>
+              <MyRecipe>
+                <>
+                  <IcecreamBox className="object">
+                    <div
+                      className={`${
+                        myRecipe.length === 1
+                          ? "first"
+                          : myRecipe.length === 2
+                          ? "second"
+                          : myRecipe.length === 3
+                          ? "third"
+                          : myRecipe.length === 4
+                          ? "fourth"
+                          : myRecipe.length === 5
+                          ? "fifth"
+                          : "sixth"
+                      }`}
+                    >
+                      {myRecipe.map((item, index) => {
+                        return (
+                          <IcecreamItem
+                            key={index}
+                            className={`
                               ${index + 1 === myRecipe.length ? "active" : ""}
                               ${
                                 item === 0
@@ -357,57 +346,55 @@ export default function Home() {
                                   ? "blueberry"
                                   : "greentea"
                               } ${
-                                  index === 0
-                                    ? "one"
-                                    : index === 1
-                                    ? "two"
-                                    : index === 2
-                                    ? "three"
-                                    : index === 3
-                                    ? "four"
-                                    : index === 4
-                                    ? "five"
-                                    : "six"
-                                }`}
-                              ></IcecreamItem>
-                            );
-                          })}
-                        </div>
-                      </IcecreamBox>
-                      <p className="title">나의 조합</p>
-                    </>
-                  </MyRecipe>
+                              index === 0
+                                ? "one"
+                                : index === 1
+                                ? "two"
+                                : index === 2
+                                ? "three"
+                                : index === 3
+                                ? "four"
+                                : index === 4
+                                ? "five"
+                                : "six"
+                            }`}
+                          ></IcecreamItem>
+                        );
+                      })}
+                    </div>
+                  </IcecreamBox>
+                  <p className="title">나의 조합</p>
                 </>
-              )}
-            </RecipeWrapper>
-            <BtnWrap>
-              <div className="buttons">
-                {randomBtnArray.map((btnIndex) => {
-                  return (
-                    <Button
-                      key={btnIndex}
-                      className={
-                        btnIndex === 0
-                          ? "strawberry"
-                          : btnIndex === 1
-                          ? "choco"
-                          : btnIndex === 2
-                          ? "mint"
-                          : btnIndex === 3
-                          ? "vanilla"
-                          : btnIndex === 4
-                          ? "blueberry"
-                          : "greentea"
-                      }
-                      onClick={() => handleMyResipeMake(btnIndex)}
-                    ></Button>
-                  );
-                })}
-              </div>
-              <span>SELECT ME!!!</span>
-            </BtnWrap>
-          </>
-        )}
+              </MyRecipe>
+            </>
+          )}
+        </RecipeWrapper>
+        <BtnWrap>
+          <div className="buttons">
+            {randomBtnArray.map((btnIndex) => {
+              return (
+                <Button
+                  key={btnIndex}
+                  className={
+                    btnIndex === 0
+                      ? "strawberry"
+                      : btnIndex === 1
+                      ? "choco"
+                      : btnIndex === 2
+                      ? "mint"
+                      : btnIndex === 3
+                      ? "vanilla"
+                      : btnIndex === 4
+                      ? "blueberry"
+                      : "greentea"
+                  }
+                  onClick={() => handleMyResipeMake(btnIndex)}
+                ></Button>
+              );
+            })}
+          </div>
+          <span>SELECT ME!!!</span>
+        </BtnWrap>
       </Wrapper>
       {showRank && (
         <RankingScreen

@@ -7,13 +7,11 @@ export default function ProtectRoute({ children }) {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Listen to authentication state changes
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setAuthenticated(!!user);
       setLoading(false);
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
 
@@ -22,10 +20,8 @@ export default function ProtectRoute({ children }) {
   }
 
   if (!authenticated) {
-    // Redirect to login if not authenticated
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" />;
   }
 
-  // Render children if authenticated
   return <>{children}</>;
 }
