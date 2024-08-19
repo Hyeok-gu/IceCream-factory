@@ -26,6 +26,11 @@ const HallFame = (props) => {
                   : ""
               }`}
             >
+              <img
+                className="photo"
+                alt="프로필 이미지"
+                src={item.photoURL}
+              ></img>
               <span>{item.userName}</span>
               <span>{item.score}</span>
             </RankingItem>

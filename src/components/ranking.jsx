@@ -49,6 +49,9 @@ const Title = styled.p`
   text-align: center;
   height: 34px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  width: 100%;
+  padding-bottom: 8px;
+  margin-bottom: 24px;
 `;
 
 const ScrollWrap = styled.div`
