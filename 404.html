@@ -31,12 +31,10 @@
           l.hash;
 
         // Append a query parameter to avoid infinite redirect loop
-        if (!l.search.includes("redirected=true")) {
-          newUrl += (l.search ? "&" : "?") + "redirected=true";
+        newUrl += (l.search ? "&" : "?") + "redirected=true";
 
-          // Redirect to the new URL
-          window.location.replace(newUrl);
-        }
+        // Redirect to the new URL
+        window.location.replace(newUrl);
       }
     </script>
   </head>
